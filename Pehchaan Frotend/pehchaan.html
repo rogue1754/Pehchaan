@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<title>Pehchaan — Identity Record Audit</title>
+<style>
+:root{--ink:#17231f;--muted:#77817b;--line:#e7eae5;--bg:#f5f7f3;--green:#1d654b;--mint:#e4f3e9;--amber:#fff2d8;--red:#ffebe8;--blue:#e9f0ff;--card:#fff;--shadow:0 12px 35px #183b2810}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:100vh}.sidebar{background:#fff;border-right:1px solid var(--line);padding:27px 17px;display:flex;flex-direction:column;gap:26px}.brand{display:flex;align-items:center;gap:11px;padding:0 10px}.brandmark{width:39px;height:39px;border-radius:13px;background:var(--green);color:white;display:grid;place-items:center;font-size:20px;font-weight:800}.brand b{font-size:19px;letter-spacing:-.7px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:-3px}.navlabel{font-size:10px;letter-spacing:1.4px;color:#9ba39d;font-weight:800;padding:0 12px;margin-bottom:5px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#67736b;text-align:left;padding:11px 13px;border-radius:11px;display:flex;gap:12px;align-items:center;font-weight:600}.nav button span{font-size:17px;width:20px;text-align:center}.nav button.active,.nav button:hover{background:#eaf4ed;color:var(--green)}.sidebottom{margin-top:auto}.privacy{padding:15px;border-radius:14px;background:#f2f7f2;border:1px solid #e0ece2}.privacy strong{display:flex;gap:8px;align-items:center;font-size:12px}.privacy p{font-size:11px;color:#68756c;margin:7px 0 0}.main{min-width:0;padding:30px clamp(18px,4vw,48px) 45px;max-width:1600px;width:100%;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:30px}.eyebrow{color:var(--green);font-size:11px;letter-spacing:1.4px;font-weight:800}.topbar h1{font-size:27px;letter-spacing:-1px;margin:4px 0 0}.user{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);padding:7px 12px;border-radius:14px}.avatar{background:#dceee1;color:var(--green);width:33px;height:33px;border-radius:11px;display:grid;place-items:center;font-weight:800}.user small{display:block;color:var(--muted);font-size:11px}.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px}.primary{background:var(--green);color:white}.primary:hover{background:#14523b}.secondary{background:#fff;border:1px solid var(--line);color:var(--ink)}.quiet{background:#f3f6f2;color:var(--green)}.welcome{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:22px}.welcome h2{font-size:23px;letter-spacing:-.7px;margin:0 0 5px}.welcome p{margin:0;color:var(--muted)}.actions{display:flex;gap:9px;flex-wrap:wrap}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:20px}.metric,.panel{background:var(--card);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow)}.metric{padding:18px}.metric-head{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px;font-weight:600}.metric-icon{width:35px;height:35px;border-radius:11px;display:grid;place-items:center;font-size:17px}.metric strong{display:block;font-size:29px;letter-spacing:-1px;margin:12px 0 1px}.metric small{color:var(--muted);font-size:11px}.good{color:var(--green)!important}.warn{color:#a96b13!important}.bad{color:#c65348!important}.contentgrid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(270px,1fr);gap:17px;margin-bottom:18px}.panel{padding:21px;min-width:0}.panelhead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:17px}.panelhead h3{margin:0;font-size:15px;letter-spacing:-.2px}.panelhead p{color:var(--muted);font-size:12px;margin:4px 0 0}.textbtn{border:0;background:transparent;color:var(--green);font-weight:800;font-size:12px}.source-list{display:grid;gap:12px}.source{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:13px}.sourceicon{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;font-size:18px;flex-shrink:0}.sourceinfo{min-width:0;flex:1}.sourceinfo strong{font-size:12px;display:block}.sourceinfo small{color:var(--muted);font-size:11px}.pill{font-size:10px;font-weight:800;padding:5px 8px;border-radius:7px;white-space:nowrap}.pill.green{background:var(--mint);color:#236c4d}.pill.amber{background:var(--amber);color:#97610f}.pill.red{background:var(--red);color:#b7463d}.activity{display:grid;gap:0}.event{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f0f2ee}.event:last-child{border:0}.eventdot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex-shrink:0}.event strong{font-size:12px;display:block}.event p{margin:3px 0;color:var(--muted);font-size:11px}.event time{color:#9ba39d;font-size:10px}.ledger{margin-top:18px}.toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.search{flex:1;min-width:190px;position:relative}.search input{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px 10px 35px;background:#fbfcfa;outline:none}.search:before{content:"⌕";position:absolute;left:12px;top:5px;font-size:21px;color:#87928a}.toolbar select{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;color:#526057}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;white-space:nowrap}th{text-align:left;text-transform:uppercase;letter-spacing:.8px;font-size:9px;color:#8a958c;padding:12px 10px;border-bottom:1px solid var(--line)}td{padding:14px 10px;border-bottom:1px solid #f0f2ee;font-size:12px}tr:last-child td{border-bottom:0}.recordname{font-weight:750}.sub{display:block;color:var(--muted);font-size:10px;margin-top:3px}.statusselect{border:0;border-radius:7px;padding:6px 8px;font-size:10px;font-weight:800;background:var(--mint);color:#236c4d}.statusselect.unfamiliar{background:var(--amber);color:#97610f}.statusselect.review{background:var(--red);color:#b7463d}.rowaction{border:1px solid var(--line);background:white;border-radius:7px;padding:6px 9px;font-size:11px;font-weight:700}.notice{display:flex;gap:11px;align-items:flex-start;padding:14px 16px;background:#fff9e9;border:1px solid #f2e4bd;border-radius:13px;color:#735c2d;font-size:11px;margin-top:17px}.notice b{display:block;color:#634d20;margin-bottom:2px}.page{display:none}.page.active{display:block}.uploadzone{border:1.5px dashed #b7cbbd;border-radius:17px;background:#f9fcf9;text-align:center;padding:36px 20px}.uploadicon{font-size:30px;margin-bottom:8px}.uploadzone h3{margin:0 0 5px}.uploadzone p{color:var(--muted);margin:0 0 17px}.fileinput{display:none}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:17px}.step{border:1px solid var(--line);border-radius:13px;padding:15px;background:#fff}.step b{display:block;font-size:12px;margin:7px 0 4px}.step p{font-size:11px;color:var(--muted);margin:0}.settingsrow{display:flex;justify-content:space-between;gap:20px;padding:17px 0;border-bottom:1px solid var(--line)}.settingsrow:last-child{border:0}.settingsrow p{margin:4px 0 0;color:var(--muted);font-size:12px}.toggle{accent-color:var(--green);width:18px;height:18px}.toast{position:fixed;right:25px;bottom:25px;background:#173f2f;color:white;padding:13px 18px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:5}.empty{padding:28px;text-align:center;color:var(--muted)}footer{text-align:center;color:#9aa49c;font-size:10px;margin-top:28px}
+@media(max-width:1000px){.app{grid-template-columns:78px minmax(0,1fr)}.sidebar{padding:22px 10px}.brand{padding:0;justify-content:center}.brandtext,.navlabel,.nav button .navtext,.privacy{display:none}.nav button{justify-content:center;padding:13px 8px}.nav button span{font-size:20px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.contentgrid{grid-template-columns:1fr}}
+@media(max-width:600px){.main{padding:20px 13px 30px}.topbar{margin-bottom:23px}.topbar h1{font-size:22px}.user .usertext{display:none}.welcome{align-items:flex-start;flex-direction:column}.welcome h2{font-size:21px}.metrics{gap:9px}.metric{padding:13px}.metric strong{font-size:25px}.metric-head{font-size:10px}.panel{padding:15px}.steps{grid-template-columns:1fr}.actions{width:100%}.actions .btn{flex:1}.sidebar{padding:18px 7px}.app{grid-template-columns:57px minmax(0,1fr)}}
+
+/* Modern responsive polish */
+:root{--shadow:0 14px 40px rgba(22,57,37,.075)}
+button,.btn,.rowaction,input,select{transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9acbb0;outline-offset:2px}
+.panel,.metric{transition:box-shadow .2s ease,transform .2s ease}
+.panel:hover,.metric:hover{box-shadow:0 18px 44px rgba(22,57,37,.09)}
+.uploadzone{transition:border-color .2s ease,background .2s ease}.uploadzone:hover{border-color:var(--green);background:#f4faf5}
+.report-box{margin-top:16px;text-align:left;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:13px}
+.report-option{border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}
+.report-option strong{display:block;font-size:12px}.report-option p{font-size:11px;color:var(--muted);margin:5px 0 10px}.report-files{display:grid;gap:7px;margin-top:10px}.report-file-item{display:flex;align-items:flex-start;gap:7px;padding:8px;background:#f5f8f4;border-radius:8px;font-size:11px;overflow-wrap:anywhere}.report-file-item span{flex:1;min-width:0}.report-file-item small{display:block;color:var(--muted);margin-top:2px}.report-file-item button{border:0;background:transparent;color:#a3443b;font-weight:800;padding:0 3px}
+.api-note{background:#eef5ff;border:1px solid #d9e6fb;border-radius:12px;padding:13px 15px;color:#36557d;font-size:12px;margin-top:14px}
+.file-feedback-card{padding:12px;background:#f5f8f4;border-radius:10px;margin-top:12px;font-size:12px;color:#536158;overflow-wrap:anywhere}
+@media(max-width:600px){.report-grid{grid-template-columns:1fr}.report-box{padding:13px}.uploadzone{padding:25px 14px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+
+.profile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.profile-grid label{font-size:12px;font-weight:700;color:#526057}.profile-grid input{display:block;width:100%;margin-top:6px;padding:11px;border:1px solid var(--line);border-radius:9px;background:#fbfcfa;color:var(--ink)}.category-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.category{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);padding:13px;border-radius:12px;background:#fff;cursor:pointer}.category input{accent-color:var(--green);margin-top:3px}.category b{display:block;font-size:12px}.category small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.comparison-table{width:100%;border-collapse:collapse;white-space:normal}.comparison-table th,.comparison-table td{vertical-align:top;min-width:130px}.comparison-table td{line-height:1.5}.flag-actions{display:flex;gap:7px;flex-wrap:wrap}.flag-btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 9px;font-size:11px;font-weight:750}.flag-btn.selected{background:var(--amber);border-color:#e9d4a0;color:#86570e}.demo-result{border:1px solid var(--line);border-radius:13px;margin-top:10px;padding:14px}.demo-result h4{margin:0 0 8px;font-size:13px}.demo-disclaimer{font-size:11px;color:#6d5a2d;background:#fff8e8;border:1px solid #f0e0b7;border-radius:10px;padding:12px;margin-top:12px}
+@media(max-width:800px){.profile-grid,.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:500px){.profile-grid,.category-grid{grid-template-columns:1fr}}
+
+
+/* Accessibility: larger, more readable typography across the prototype */
+html{font-size:16px}
+body{font-size:16px;line-height:1.6}
+.brand b{font-size:21px}.brand small{font-size:13px}
+.navlabel{font-size:12px}.nav button{font-size:15px;min-height:44px}
+.privacy strong{font-size:14px}.privacy p{font-size:13px}
+.eyebrow{font-size:13px}.topbar h1{font-size:30px}.user small{font-size:13px}
+.btn{font-size:15px;padding:12px 16px;min-height:44px}
+.welcome h2{font-size:26px}.welcome p{font-size:16px}
+.metric-head{font-size:14px}.metric strong{font-size:32px}.metric small{font-size:13px}
+.panelhead h3{font-size:18px}.panelhead p{font-size:14px}
+.sourceinfo strong,.event strong{font-size:15px}.sourceinfo small,.event p{font-size:13px}.event time{font-size:12px}
+.textbtn{font-size:14px}.pill{font-size:12px;padding:6px 10px}
+th{font-size:11px}td{font-size:14px}.sub{font-size:12px}
+.statusselect{font-size:12px;padding:8px 10px}.rowaction{font-size:13px;padding:8px 11px;min-height:40px}
+.notice{font-size:13px}.uploadzone h3{font-size:21px}.uploadzone p{font-size:15px}
+.step b{font-size:15px}.step p{font-size:13px}
+.report-option strong{font-size:15px}.report-option p{font-size:13px}.report-file-item{font-size:13px}
+.file-feedback-card,.api-note{font-size:14px!important;line-height:1.6}
+.settingsrow p{font-size:14px}.settingsrow strong{font-size:15px}
+.search input,.toolbar select{font-size:15px;min-height:44px}.empty{font-size:14px}footer{font-size:12px}
+@media(max-width:600px){
+ body{font-size:16px}.topbar h1{font-size:25px}.welcome h2{font-size:23px}
+ .metric-head{font-size:12px}.metric strong{font-size:27px}.metric small{font-size:12px}
+ .panelhead h3{font-size:17px}.panelhead p{font-size:13px}
+ .report-grid{grid-template-columns:1fr}.report-option strong{font-size:16px}.report-option p{font-size:14px}
+ .btn{font-size:15px}.sourceinfo strong,.event strong{font-size:14px}
+}
+
+
+/* Pehchaan palette: Olive Grove + Warm Earth */
+:root{
+  --ink:#283618;
+  --muted:#606c38;
+  --line:#d9ddc8;
+  --bg:#fefae0;
+  --green:#606c38;
+  --mint:#edf0dc;
+  --amber:#f8e8c8;
+  --red:#ffebe8;
+  --blue:#edf0dc;
+  --card:#fffdf2;
+  --shadow:0 12px 35px #28361812;
+  --olive:#606c38;
+  --forest:#283618;
+  --cream:#fefae0;
+  --ochre:#dda15e;
+  --clay:#bc6c25;
+}
+body{background:var(--bg);color:var(--ink)}
+header,.topbar,.sidebar,.nav,.brand{color:var(--forest)}
+.logo,.brand-mark,.primary,.btn-primary,button.primary,.active-nav,.nav a.active{
+  background:var(--forest)!important;color:var(--cream)!important;border-color:var(--forest)!important
+}
+button,.btn,.secondary,.upload-btn,.file-button{border-color:#c8cda9}
+button:hover,.btn:hover,.upload-btn:hover,.file-button:hover{border-color:var(--olive);background:#f1edcf}
+.card,.panel,.stat-card,.category-card,.report-card,.modal,.dropdown-menu{
+  background:var(--card);border-color:var(--line);box-shadow:var(--shadow)
+}
+.badge,.pill,.tag,.status-neutral{background:#edf0dc;color:var(--forest)}
+.status-warning,.badge-warning,.flag{background:#f8e8c8;color:#794315}
+.link,a{color:var(--clay)}
+a:hover{color:var(--forest)}
+.progress,.progress-bar,.step.active,.tab.active{background:var(--olive)}
+input:focus,select:focus,textarea:focus{border-color:var(--ochre)!important;box-shadow:0 0 0 3px #dda15e35!important;outline:none}
+hr,.divider{border-color:var(--line)}
+.sidebar{background:#f8f6df}
+button:focus-visible,a:focus-visible,[role="button"]:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+
+/* Pehchaan alternate theme: Midnight Blue + Gold */
+:root{
+  --ink:#000814;
+  --muted:#53647a;
+  --line:#d8e0e9;
+  --bg:#f5f7fb;
+  --green:#003566;
+  --mint:#e5edf6;
+  --amber:#fff2bf;
+  --red:#ffe7dc;
+  --blue:#e4edf8;
+  --card:#ffffff;
+  --shadow:0 14px 40px rgba(0,29,61,.09);
+  --theme-navy:#000814;
+  --theme-deep:#001d3d;
+  --theme-blue:#003566;
+  --theme-gold:#ffc300;
+  --theme-yellow:#ffd60a;
+}
+body{background:var(--bg);color:var(--ink)}
+.sidebar{background:var(--theme-deep);border-right-color:#12395e;color:#fff}
+.brand b,.brand small{color:#fff}
+.brandmark{background:var(--theme-gold);color:var(--theme-navy)}
+.navlabel{color:#c0d0e2}
+.nav button{color:#d8e4f2}
+.nav button.active,.nav button:hover{background:var(--theme-blue);color:var(--theme-yellow)}
+.privacy{background:#09294a;border-color:#23496f;color:#fff}
+.privacy p{color:#d2deeb}
+.main{background:var(--bg)}
+.eyebrow,.textbtn,.good{color:var(--theme-blue)!important}
+.primary{background:var(--theme-blue);color:#fff}
+.primary:hover{background:var(--theme-deep)}
+.quiet{background:#fff3c4;color:var(--theme-deep)}
+.nav button:focus-visible,.btn:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--theme-gold);outline-offset:2px}
+.avatar,.metric-icon{background:#e4edf8;color:var(--theme-blue)}
+.pill.green{background:#e4edf8;color:var(--theme-blue)}
+.pill.amber{background:#fff0ad;color:#664d00}
+.statusselect{background:#e4edf8;color:var(--theme-blue)}
+.statusselect.unfamiliar{background:#fff0ad;color:#664d00}
+.notice,.demo-disclaimer{background:#fff8d9;border-color:#f0d45a;color:#4b3a00}
+.notice b{color:#332800}
+.uploadzone{background:#f9fbff;border-color:#8da9c6}
+.report-file-item,.file-feedback-card{background:#f0f5fb}
+.report-file-item button{color:#9b3d25}
+.api-note{background:#eaf1fa;border-color:#c7d8ed;color:#183d62}
+.toast{background:var(--theme-deep);border:1px solid #31577c}
+.category input,.toggle{accent-color:var(--theme-blue)}
+.flag-btn.selected{background:#fff0ad;border-color:var(--theme-gold);color:#4a3900}
+@media(max-width:600px){.sidebar{background:var(--theme-deep)}}
+/* Make the Optional badge beside the government-report upload section more prominent */
+.report-box > .panelhead > .pill.green { font-size: 16px; padding: 10px 16px; border-radius: 10px; min-height: 42px; display: inline-flex; align-items: center; justify-content: center; }
+@media (max-width: 600px) { .report-box > .panelhead > .pill.green { font-size: 16px; padding: 11px 16px; min-height: 44px; } }
+
+/* Pehchaan theme preview: Charcoal + Crimson + Warm Peach */
+:root{
+  --ink:#1e1e24;
+  --muted:#55545c;
+  --line:#e7d9ce;
+  --bg:#fff8f0;
+  --green:#92140c;
+  --mint:#f8e8df;
+  --amber:#ffcf99;
+  --red:#fbe5e2;
+  --blue:#ececf2;
+  --card:#ffffff;
+  --shadow:0 14px 38px rgba(30,30,36,.09);
+  --theme-navy:#1e1e24;
+  --theme-deep:#111d4a;
+  --theme-blue:#111d4a;
+  --theme-gold:#ffcf99;
+  --theme-yellow:#ffcf99;
+  --theme-red:#92140c;
+}
+body,.main{background:var(--bg);color:var(--ink)}
+.sidebar{background:var(--theme-deep);border-right-color:#2d3761;color:#fff}
+.brand b,.brand small{color:#fff}
+.brandmark{background:var(--theme-gold);color:var(--theme-navy)}
+.navlabel{color:#d9d9e4}
+.nav button{color:#f0eff5}
+.nav button.active,.nav button:hover{background:var(--theme-red);color:#fff}
+.privacy{background:#202b55;border-color:#424c76;color:#fff}
+.privacy p{color:#ecebf2}
+.eyebrow,.textbtn,.good{color:var(--theme-blue)!important}
+.primary{background:var(--theme-blue);color:#fff;border-color:var(--theme-blue)}
+.primary:hover{background:#263568;color:#fff}
+.quiet{background:#ffead2;color:#5b211d}
+.logo,.brand-mark,.btn-primary,.active-nav,.nav a.active{background:var(--theme-deep)!important;color:#fff8f0!important;border-color:var(--theme-deep)!important}
+button,.btn,.secondary,.upload-btn,.file-button{border-color:#d7bca7}
+button:hover,.btn:hover,.upload-btn:hover,.file-button:hover{border-color:var(--theme-red);background:#fff0e3}
+.card,.panel,.stat-card,.category-card,.report-card,.modal,.dropdown-menu{background:var(--card);border-color:var(--line);box-shadow:var(--shadow)}
+.badge,.pill,.tag,.status-neutral{background:#f4e8df;color:#332b2c}
+.status-warning,.badge-warning,.flag,.pill.amber{background:#ffead2;color:#67251e}
+.link,a{color:var(--theme-red)}
+a:hover{color:var(--theme-deep)}
+.progress,.progress-bar,.step.active,.tab.active{background:var(--theme-red)}
+input:focus,select:focus,textarea:focus{border-color:var(--theme-red)!important;box-shadow:0 0 0 3px #92140c25!important;outline:none}
+hr,.divider{border-color:var(--line)}
+button:focus-visible,a:focus-visible,[role="button"]:focus-visible,.nav button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--theme-gold);outline-offset:2px}
+.avatar,.metric-icon,.pill.green{background:#f8e8df;color:var(--theme-red)}
+.statusselect{background:#ececf2;color:var(--theme-deep)}
+.statusselect.unfamiliar,.flag-btn.selected{background:#ffead2;border-color:var(--theme-gold);color:#67251e}
+.notice,.demo-disclaimer{background:#fff0df;border-color:#ffcf99;color:#4d2922}
+.notice b{color:#311b1b}
+.uploadzone{background:#fffaf6;border-color:#c9a998}
+.report-file-item,.file-feedback-card{background:#fff2e8}
+.report-file-item button{color:var(--theme-red)}
+.api-note{background:#f2eee9;border-color:#dfcfc4;color:#3d3435}
+.toast{background:var(--theme-deep);border:1px solid #424c76}
+.category input,.toggle{accent-color:var(--theme-red)}
+@media(max-width:600px){.sidebar{background:var(--theme-deep)}}
+
+/* Multi-import report uploader inspired by the supplied reference */
+.report-box{background:#fffdf5!important;border-color:#e5dfc5!important}
+.report-imports{display:grid;gap:14px;margin-top:12px}.report-import-card{border:1px solid #e2dfc8;border-radius:14px;background:#fffef9;padding:15px;min-width:0}.report-import-head{display:flex;align-items:center;gap:9px;margin-bottom:13px}.import-number{display:grid;place-items:center;background:#ecebd3;color:#283618;border-radius:8px;width:30px;height:30px;font-weight:850}.report-import-head>strong{font-size:16px}.remove-import{margin-left:auto;border:0;background:transparent;color:#92140c;font-weight:750;padding:7px}.report-import-fields{display:grid;grid-template-columns:minmax(220px,.9fr) minmax(0,1.55fr);gap:14px}.import-category,.import-files{display:grid;align-content:start;gap:8px;min-width:0}.import-category>b,.import-files>b{font-size:14px}.import-category select{width:100%;min-height:44px;border:1px solid #d9d6bf;border-radius:10px;background:#fffef9;padding:10px 12px;color:#252a20}.import-drop{display:flex;align-items:center;gap:10px;border:1px dashed #c7c5a1;background:#f8f8e9;border-radius:12px;padding:12px;min-width:0}.import-file-icon{display:grid;place-items:center;flex-shrink:0;width:36px;height:36px;border-radius:10px;background:#efefd8}.import-file-summary{min-width:0;flex:1}.import-file-summary strong{display:block;font-size:14px}.import-file-summary small{display:block;color:#656957;font-size:12px;overflow-wrap:anywhere;max-height:3.3em;overflow:hidden}.import-file-list{display:grid;gap:7px;margin-top:8px}.import-file-list .report-file-item{background:#f4f3df;padding:10px;font-size:13px}.import-file-list .report-file-item small{font-size:11px}.report-import-actions{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}.submit-reports{margin:0 0 14px;min-height:48px;padding:12px 20px;font-size:15px}.api-note{margin-top:10px}
+@media(max-width:760px){.report-import-fields{grid-template-columns:1fr}.report-import-card{padding:12px}.import-drop{flex-wrap:wrap}.import-file-summary{min-width:calc(100% - 55px)}.import-drop .btn{margin-left:auto}.report-import-head>strong{font-size:15px}.remove-import{font-size:12px}}
+
+.connected-sources-list{max-height:360px;overflow-y:auto;overscroll-behavior:contain;padding:2px 5px 2px 0;scrollbar-width:thin;scrollbar-color:#b7cbbd #f4f7f3}.connected-sources-list .source{min-height:69px}.connected-sources-list::-webkit-scrollbar{width:8px}.connected-sources-list::-webkit-scrollbar-track{background:#f4f7f3;border-radius:10px}.connected-sources-list::-webkit-scrollbar-thumb{background:#b7cbbd;border-radius:10px}.source-view-btn{flex-shrink:0;white-space:nowrap}@media(max-width:600px){.connected-sources-list{max-height:344px}.connected-sources-list .source{padding:10px;gap:9px}.connected-sources-list .sourceicon{width:34px;height:34px}.connected-sources-list .sourceinfo strong{font-size:11px}.connected-sources-list .sourceinfo small{font-size:10px}.connected-sources-list .source-view-btn{padding:8px;font-size:10px}}
+</style>
+
+<style id="pehchaan-green-lime-theme">
+:root{
+ --ink:#19381F!important;--muted:#526653!important;--bg:#F8FAF4!important;--card:#FFFFFF!important;--line:#DCE7D4!important;--shadow:0 8px 24px rgba(25,56,31,.08)!important;
+ --green:#4C934C!important;--forest:#19381F!important;--mint:#E8F4DF!important;--amber:#EEE82C!important;--red:#FBE5E1!important;
+ --theme-deep:#19381F!important;--theme-navy:#19381F!important;--theme-blue:#4C934C!important;--theme-green:#53A548!important;--theme-gold:#EEE82C!important;--theme-yellow:#91CB3E!important;--theme-red:#53A548!important;--cream:#F8FAF4!important;
+}
+body,.main{background:var(--bg)!important;color:#19381F!important}
+.sidebar{background:#19381F!important;border-right-color:#31563A!important;color:#F8FAF4!important}
+.brandmark,.brand-mark{background:#91CB3E!important;color:#19381F!important}
+.nav button{color:#E5EDE0!important}
+.nav button.active,.nav button:hover{background:#315C35!important;color:#EEE82C!important}
+.navlabel{color:#B6C8B0!important}
+.primary,.btn-primary{background:#91CB3E!important;color:#19381F!important;border-color:#91CB3E!important}
+.primary:hover,.btn-primary:hover{background:#A6D95C!important}
+.secondary{background:#fff!important;color:#19381F!important;border-color:#C8D9C1!important}
+.quiet{background:#E8F4DF!important;color:#19381F!important}
+.eyebrow,.textbtn,.good{color:#4C934C!important}
+.avatar,.metric-icon{background:#E8F4DF!important;color:#19381F!important}
+.privacy{background:#24492A!important;border-color:#426A43!important;color:#F8FAF4!important}
+.privacy p{color:#D7E5D1!important}
+.panel,.metric,.card,.category-card,.report-card,.modal,.dropdown-menu{background:#fff!important;border-color:#DCE7D4!important}
+.uploadzone{background:#F4F8ED!important;border-color:#91CB3E!important}
+.import-number,.import-file-icon{background:#E8F4DF!important;color:#19381F!important}
+.report-import-card{background:#FFFFFF!important;border-color:#DCE7D4!important}
+.import-drop{background:#F5F9EF!important;border-color:#91CB3E!important}
+.import-category select,.search input,.profile-grid input{background:#fff!important;color:#19381F!important;border-color:#C8D9C1!important}
+.report-file-item,.import-file-list .report-file-item{background:#F0F6E8!important;color:#19381F!important}
+.pill.green{background:#E0F0D8!important;color:#285E2C!important}
+.pill.amber,.statusselect.unfamiliar,.flag-btn.selected{background:#F7F3A6!important;color:#3E4510!important;border-color:#D6D44B!important}
+.pill.red,.statusselect.review{background:#FBE5E1!important;color:#922E24!important}
+.notice,.demo-disclaimer{background:#FBFBE7!important;border-color:#E5E6A4!important;color:#48512C!important}
+.notice b{color:#19381F!important}
+.toast{background:#19381F!important;color:#fff!important}
+input:focus,select:focus,textarea:focus{border-color:#53A548!important;box-shadow:0 0 0 3px #91CB3E40!important;outline:none}
+@media(max-width:700px){.sidebar{background:#19381F!important}.nav button.active,.nav button:hover{background:#315C35!important}}
+</style>
+
+
+<style id="pehchaan-theme-crimson">
+:root{--ink:#382e31;--muted:#665b5f;--line:#e7dfe1;--bg:#fff8f0;--green:#ac274f;--mint:#f9e5eb;--amber:#ffcf99;--red:#fbe1e5;--blue:#f5e8ed;--card:#ffffff;--shadow:0 12px 35px rgba(56,46,49,.09);--olive:#ac274f;--forest:#080808;--cream:#fff8f0;--ochre:#eb638b;--clay:#ac274f}
+body{background:var(--bg);color:var(--ink)}
+.sidebar{background:#080808;color:#fff;border-right-color:#382e31}
+.sidebar .brand,.sidebar .brand b,.sidebar .brand small,.sidebar .navlabel,.sidebar .nav button,.sidebar .privacy strong,.sidebar .privacy p{color:#fff}
+.brandmark{background:#ac274f;color:#fff}
+.nav button.active,.nav button:hover{background:#382e31;color:#fff}
+.nav button.active{box-shadow:inset 3px 0 #eb638b}
+.privacy{background:#382e31;border-color:#66565c}
+.main{background:var(--bg)}
+.eyebrow,.textbtn,.link,a{color:#ac274f}
+.btn.primary,.primary,.nav .active{background:#ac274f;color:#fff}
+.btn.primary:hover,.primary:hover{background:#8f1e40}
+.btn.secondary,.secondary{background:#fff;border-color:#e7dfe1;color:#382e31}
+.btn.quiet,.quiet{background:#f9e5eb;color:#921b40}
+.avatar{background:#f9e5eb;color:#ac274f}
+.metric,.panel,.step,.report-box,.report-option,.category,.source,.demo-result{border-color:#e7dfe1}
+.metric-icon{background:#f9e5eb;color:#ac274f}
+.pill.green,.badge,.pill,.tag,.status-neutral{background:#f9e5eb;color:#921b40}
+.pill.amber,.statusselect.unfamiliar,.flag-btn.selected{background:#ffcf99;color:#382e31}
+.pill.red,.statusselect.review{background:#fbe1e5;color:#921b40}
+.good{color:#ac274f!important}.warn{color:#8b5b22!important}.bad{color:#921b40!important}
+.uploadzone{background:#fff;border-color:#eb9bb3}
+.uploadzone:hover{background:#fff2f5;border-color:#ac274f}
+.report-file-item{background:#fff2f5}
+.report-file-item button{color:#ac274f}
+.category input,.toggle{accent-color:#ac274f}
+.notice,.demo-disclaimer{background:#fff2f5;border-color:#ebc0cd;color:#5e3542}
+.notice b{color:#382e31}
+.progress,.progress-bar,.step.active,.tab.active{background:#ac274f}
+input:focus,select:focus,textarea:focus{border-color:#eb638b!important;box-shadow:0 0 0 3px #eb638b35!important;outline:none}
+.toast{background:#080808;color:#fff;border-left:4px solid #eb638b}
+footer{color:#75666b}
+@media(max-width:760px){.sidebar{background:#080808}.nav button.active,.nav button:hover{background:#382e31}}
+</style>
+
+<style id="privacy-first-palette">
+/* Privacy-first review card uses only the selected Pehchaan palette */
+.sidebar .privacy{background:#14213D!important;border:1px solid #FCA311!important;color:#FFFFFF!important}
+.sidebar .privacy strong{color:#FCA311!important}
+.sidebar .privacy p{color:#E5E5E5!important}
+.sidebar .privacy:hover{background:#14213D!important;border-color:#FCA311!important}
+</style>
+<style>
+/* Final Pehchaan theme: plum, pink, blush and teal — remove green accents */
+:root{
+ --ink:#60435F!important;
+ --muted:#66566A!important;
+ --line:#EADCE8!important;
+ --bg:#FDF7FA!important;
+ --card:#FFFFFF!important;
+ --green:#60435F!important;
+ --forest:#60435F!important;
+ --mint:#F5E5EF!important;
+ --amber:#E2A3C7!important;
+ --red:#F8E5EE!important;
+ --blue:#E8F5F4!important;
+ --shadow:0 10px 28px rgba(96,67,95,.10)!important;
+}
+body{background:var(--bg)!important;color:#382E31!important}
+.sidebar,.nav,.brandmark{background:#60435F!important}
+.btn.primary,.nav button.active,.nav button[aria-current="page"]{background:#60435F!important;color:#fff!important;border-color:#60435F!important}
+.btn.primary:hover,.rowaction:hover{background:#4E3550!important}
+.btn.secondary,.textbtn,.rowaction{color:#60435F!important;border-color:#E2A3C7!important}
+.pill,.import-number,.metric-icon,.sourceicon,.upload-icon{background:#F5E5EF!important;color:#60435F!important}
+.pill.good,.pill.success,.status-good,.good{background:#E8F5F4!important;color:#286D69!important}
+.pill.warn,.status-review,.warn{background:#F9E9F1!important;color:#8D3F70!important}
+.report-import-card,.report-option,.uploadzone,.file-feedback-card{border-color:#EADCE8!important;background:#FFFCFE!important}
+.report-import-card .import-number{background:#F5E5EF!important;color:#60435F!important}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline-color:#D67AB1!important;box-shadow:0 0 0 3px rgba(214,122,177,.22)!important}
+.sourceicon[style],.eventicon[style]{background:#F5E5EF!important;color:#60435F!important}
+.good,.success{color:#286D69!important}
+</style>
+<style id="pehchaan-remove-green-use-teal">
+/* Replace remaining green success/status accents with the requested teal */
+:root{--green:#A8DCD9!important;--mint:#EAF7F5!important}
+.pill.good,.pill.success,.status-good,.good,.success,
+.pill.green,.badge.success,.status-verified,.verified{
+  background:#A8DCD9!important;color:#193F3D!important;border-color:#A8DCD9!important
+}
+.good,.success,.status-good{color:#286D69!important}
+.sourceicon[style],.eventicon[style]{background:#A8DCD9!important;color:#193F3D!important}
+.notice,.info-box,.tip,.success-box{background:#EAF7F5!important;border-color:#A8DCD9!important;color:#382E31!important}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{
+  outline-color:#A8DCD9!important;box-shadow:0 0 0 3px rgba(168,220,217,.45)!important
+}
+</style>
+<style id="pehchaan-black-navy-orange-theme">
+/* Pehchaan theme: Black, navy, orange, light grey and white */
+:root{
+ --bg:#FFFFFF!important; --surface:#FFFFFF!important; --text:#000000!important;
+ --muted:#5C6470!important; --border:#E5E5E5!important;
+ --primary:#14213D!important; --primary-dark:#000000!important;
+ --accent:#FCA311!important; --accent-soft:#FFF3D9!important;
+ --success:#14213D!important; --focus:#FCA311!important;
+}
+body{background:#FFFFFF!important;color:#000000!important}
+.sidebar,.nav,.brandmark{background:#14213D!important;color:#FFFFFF!important}
+.sidebar a,.sidebar button,.nav a,.nav button{color:#FFFFFF!important}
+.btn.primary,.nav button.active,.nav button[aria-current="page"]{
+ background:#14213D!important;color:#FFFFFF!important;border-color:#14213D!important
+}
+.btn.primary:hover,.rowaction:hover{background:#000000!important;color:#FFFFFF!important}
+.btn.secondary,.textbtn,.rowaction{color:#14213D!important;border-color:#FCA311!important}
+.pill,.import-number,.metric-icon,.sourceicon,.upload-icon{
+ background:#E5E5E5!important;color:#14213D!important
+}
+.pill.good,.pill.success,.status-good,.good,.success,.pill.green,.badge.success,.status-verified,.verified{
+ background:#FFF3D9!important;color:#14213D!important;border-color:#FCA311!important
+}
+.pill.warn,.status-review,.warn{background:#FFF3D9!important;color:#704700!important;border-color:#FCA311!important}
+.report-import-card,.report-option,.uploadzone,.file-feedback-card{
+ border-color:#E5E5E5!important;background:#FFFFFF!important
+}
+.report-import-card .import-number{background:#E5E5E5!important;color:#14213D!important}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{
+ outline-color:#FCA311!important;box-shadow:0 0 0 3px rgba(252,163,17,.28)!important
+}
+.sourceicon[style],.eventicon[style]{background:#FFF3D9!important;color:#14213D!important}
+.good,.success{color:#14213D!important}
+.notice,.info-box,.tip,.success-box{background:#E5E5E5!important;border-color:#FCA311!important;color:#000000!important}
+/* Use orange as the restrained highlight, not as small-text background */
+.badge,.tag,.eyebrow{border-color:#FCA311!important}
+</style>
+<style id="pehchaan-final-palette-hover-fix">
+/* Final override: use only the selected black/navy/orange/grey/white palette, including hover states */
+:root{
+  --green:#14213D!important; --forest:#14213D!important; --mint:#E5E5E5!important;
+  --success:#14213D!important; --focus:#FCA311!important;
+}
+*:hover{--hover-accent:#FCA311}
+button:hover,.btn:hover,[role="button"]:hover,input[type="submit"]:hover,input[type="button"]:hover{
+  background-color:#FCA311!important;color:#000000!important;border-color:#FCA311!important;
+}
+.sidebar a:hover,.sidebar button:hover,.nav a:hover,.nav button:hover{
+  background-color:#14213D!important;color:#FCA311!important;
+}
+.card:hover,.panel:hover,.stat-card:hover,.report-card:hover,.import-card:hover,.upload-card:hover,
+.report-import-card:hover,.report-option:hover,.file-feedback-card:hover{
+  border-color:#FCA311!important;box-shadow:0 8px 24px rgba(20,33,61,.12)!important;
+}
+a:hover,.textbtn:hover,.rowaction:hover{color:#14213D!important;background-color:#E5E5E5!important}
+.pill.good,.pill.success,.status-good,.good,.success,.pill.green,.badge.success,.status-verified,.verified{
+  background-color:#E5E5E5!important;color:#14213D!important;border-color:#FCA311!important;
+}
+.notice,.info-box,.tip,.success-box{background-color:#E5E5E5!important;border-color:#FCA311!important;color:#000000!important}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{
+  outline:2px solid #FCA311!important;outline-offset:2px!important;box-shadow:0 0 0 3px rgba(252,163,17,.22)!important;
+}
+</style>
+<style id="pehchaan-no-green-anywhere-final">
+/* Final strict palette cleanup: black, navy, orange, light grey and white only. */
+:root{
+  --green:#14213D!important; --forest:#14213D!important; --mint:#E5E5E5!important;
+  --theme-green:#14213D!important; --theme-deep:#14213D!important;
+  --theme-blue:#14213D!important; --theme-navy:#14213D!important;
+  --success:#14213D!important; --focus:#FCA311!important;
+  --ink:#000000!important; --bg:#FFFFFF!important; --card:#FFFFFF!important;
+}
+.good,.success,.verified,.status-verified,.pill.green,.pill.good,.pill.success,
+.badge.success,.status-good,.statusselect,.sourceicon,.eventicon,.avatar,
+.metric-icon,.uploadicon,.upload-icon,.import-number{
+  color:#14213D!important;background-color:#E5E5E5!important;border-color:#E5E5E5!important;
+}
+.nav button.active,.nav button:hover,.sidebar button:hover,.sidebar a:hover{
+  background-color:#14213D!important;color:#FCA311!important;
+}
+button:hover,.btn:hover,[role="button"]:hover,input[type="submit"]:hover,input[type="button"]:hover{
+  background-color:#FCA311!important;color:#000000!important;border-color:#FCA311!important;
+}
+.btn.primary,.primary{background-color:#14213D!important;color:#FFFFFF!important;border-color:#14213D!important}
+.btn.primary:hover,.primary:hover{background-color:#FCA311!important;color:#000000!important;border-color:#FCA311!important}
+.textbtn,.rowaction,a,.eyebrow{color:#14213D!important}
+a:hover,.textbtn:hover,.rowaction:hover{background-color:#E5E5E5!important;color:#000000!important}
+.notice,.info-box,.tip,.success-box{background-color:#E5E5E5!important;border-color:#FCA311!important;color:#000000!important}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline-color:#FCA311!important;box-shadow:0 0 0 3px rgba(252,163,17,.22)!important}
+</style>
+<style id="pehchaan-address-card-logo">
+.brandmark{display:grid!important;place-items:center!important;font-size:22px!important}
+.brandmark .fa-address-card{line-height:1;color:inherit}
+</style>
+<style>.recordlink{background:none!important;border:0!important;padding:0!important;text-align:left!important;cursor:pointer;text-decoration:underline;text-underline-offset:3px}.recordlink:hover{color:#FCA311!important;background:transparent!important}.statusselect.unfamiliar{color:#14213D!important;border-color:#FCA311!important}</style>
+
+<style id="pehchaan-ledger-layout-fix">
+/* Ledger layout fix: keep the record name visible and allow horizontal scrolling on narrow screens. */
+.tablewrap{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain}
+#recordRows table{min-width:760px}
+#recordRows td:first-child{min-width:220px;max-width:320px;white-space:normal}
+.recordname,.recordlink{display:inline-block!important;max-width:100%;color:#14213D!important;background:transparent!important;border:0!important;padding:2px 0!important;font-size:14px!important;font-weight:700!important;text-align:left!important;white-space:normal!important;overflow-wrap:anywhere;text-decoration:underline;text-decoration-color:#FCA311;text-underline-offset:3px;cursor:pointer}
+.recordlink:hover{color:#000000!important;background:#E5E5E5!important}
+#recordRows td{vertical-align:middle}
+.statusselect{max-width:160px;white-space:nowrap}
+.rowaction{min-width:78px;white-space:nowrap}
+.toolbar .search{min-width:220px}
+@media(max-width:760px){.toolbar .search{min-width:100%;}.toolbar select{flex:1}.panel{padding:16px}.tablewrap table{min-width:700px}}
+</style>
+
+
+<style id="pehchaan-final-palette">
+/* Final requested palette: black, navy, orange, light grey, white only */
+:root{--primary:#14213D!important;--primary-dark:#000000!important;--accent:#FCA311!important;--surface:#FFFFFF!important;--muted:#E5E5E5!important;--green:#14213D!important;--forest:#14213D!important;--mint:#E5E5E5!important;--success:#14213D!important;--focus:#FCA311!important;color-scheme:light}
+html,body,.main,.page{background:#FFFFFF!important;color:#000000!important}
+.sidebar,.nav,.brandmark{background:#14213D!important;color:#FFFFFF!important}
+.nav button{color:#FFFFFF!important;background:transparent!important}
+.nav button:hover,.nav button.active,.nav button[aria-current="page"]{background:#000000!important;color:#FCA311!important;border-color:#FCA311!important}
+.btn.primary,.btn-primary,button.primary,[type=submit]{background:#14213D!important;color:#FFFFFF!important;border-color:#14213D!important}
+.btn.primary:hover,.btn-primary:hover,button.primary:hover,[type=submit]:hover{background:#FCA311!important;color:#000000!important;border-color:#FCA311!important}
+.btn.secondary,.textbtn,.rowaction{background:#FFFFFF!important;color:#14213D!important;border-color:#FCA311!important}
+.btn.secondary:hover,.textbtn:hover,.rowaction:hover{background:#E5E5E5!important;color:#000000!important;border-color:#FCA311!important}
+.card,.panel,.stat-card,.metric,.report-card,.import-card,.upload-card,.modal-content{background:#FFFFFF!important;border-color:#E5E5E5!important}
+input,select,textarea{background:#FFFFFF!important;color:#000000!important;border-color:#E5E5E5!important}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:2px solid #FCA311!important;outline-offset:2px!important;box-shadow:0 0 0 3px rgba(252,163,17,.2)!important}
+.pill,.metric-icon,.sourceicon,.upload-icon,.import-number{background:#E5E5E5!important;color:#14213D!important}
+.pill.green,.pill.success,.status-recognized,.good,.success,.verified{background:#E5E5E5!important;color:#14213D!important}
+.pill.amber,.pill.warn,.status-review,.warn,.warning,.attention,.review,.flagged{background:#FCA311!important;color:#000000!important}
+.danger,.error{background:#E5E5E5!important;color:#000000!important;border-color:#14213D!important}
+.notice,.info-box,.tip,.success-box,.privacy{background:#14213D!important;color:#FFFFFF!important;border-color:#FCA311!important}
+.privacy strong{color:#FCA311!important}.privacy p{color:#FFFFFF!important}
+a:not(.sidebar a){color:#14213D!important}a:not(.sidebar a):hover{color:#000000!important;background:#E5E5E5!important}
+.recordname,.recordlink{color:#14213D!important;text-decoration-color:#FCA311!important}.recordlink:hover{background:#E5E5E5!important;color:#000000!important}
+.report-file-item,.import-file-list .report-file-item{background:#E5E5E5!important;color:#000000!important;border-color:#E5E5E5!important}
+/* Replace inline green/blue/purple icon fills with palette neutrals. */
+.sourceicon[style],.eventicon[style],.metric-icon[style],.eventdot[style]{background:#E5E5E5!important;color:#14213D!important}
+@media(max-width:760px){.sidebar{background:#14213D!important}.nav button:hover,.nav button.active{background:#000000!important;color:#FCA311!important}}
+</style>
+
+
+<style id="pehchaan-plum-pink-teal-theme">
+:root{
+ --ink:#382E31!important;--muted:#756A72!important;--bg:#FDF7FA!important;--card:#FFFFFF!important;--line:#EADCE6!important;
+ --shadow:0 10px 28px rgba(96,67,95,.10)!important;--green:#60435F!important;--forest:#60435F!important;--mint:#F5E5EF!important;
+ --amber:#FFF0D6!important;--red:#FBE7ED!important;--blue:#E4F5F3!important;--cream:#FDF7FA!important;
+ --theme-deep:#60435F!important;--theme-navy:#60435F!important;--theme-blue:#A8DCD9!important;--theme-green:#60435F!important;
+ --theme-gold:#D67AB1!important;--theme-yellow:#E2A3C7!important;--theme-red:#D67AB1!important;
+}
+body,.main,.content,.page,.workspace{background:#FDF7FA!important;color:#382E31!important}
+.sidebar{background:#60435F!important;border-right-color:#765D75!important;color:#FDF7FA!important}
+.sidebar a,.sidebar button,.sidebar .nav-item,.sidebar .nav-link{color:#FDF7FA!important}
+.sidebar a.active,.sidebar .active,.sidebar .nav-item.active,.sidebar .nav-link.active{background:rgba(226,163,199,.22)!important;color:#FFFFFF!important}
+.brandmark,.brand-mark,.logo-mark{background:#E2A3C7!important;color:#60435F!important}
+.primary,.btn-primary,button.primary,[type=submit]{background:#60435F!important;color:#FFFFFF!important;border-color:#60435F!important}
+.primary:hover,.btn-primary:hover,button.primary:hover,[type=submit]:hover{background:#4C354B!important}
+.secondary{background:#FFFFFF!important;color:#60435F!important;border-color:#DCC6D8!important}
+.quiet,.badge,.tag,.pill{background:#F5E5EF!important;color:#60435F!important;border-color:#E2A3C7!important}
+.avatar,.metric-icon,.import-number,.import-file-icon{background:#F5E5EF!important;color:#60435F!important}
+.card,.panel,.stat-card,.report-card,.import-card,.upload-card,.modal-content{background:#FFFFFF!important;border-color:#EADCE6!important;box-shadow:0 8px 24px rgba(96,67,95,.07)!important}
+input,select,textarea,.import-category select,.search input,.profile-grid input{background:#FFFFFF!important;color:#382E31!important;border-color:#DCC6D8!important}
+input:focus,select:focus,textarea:focus{outline:3px solid rgba(168,220,217,.75)!important;border-color:#60435F!important}
+.report-file-item,.import-file-list .report-file-item{background:#FDF7FA!important;color:#382E31!important;border-color:#EADCE6!important}
+.notice,.info-box,.tip,.success-box{background:#EAF7F5!important;border-color:#A8DCD9!important;color:#382E31!important}
+.warning,.attention,.review{background:#FFF0D6!important;border-color:#E2A3C7!important;color:#60435F!important}
+.danger,.flagged,.error{background:#FBE7ED!important;color:#8A244E!important}
+a:not(.sidebar a){color:#60435F!important}
+button:focus-visible,a:focus-visible{outline:3px solid #A8DCD9!important;outline-offset:3px!important}
+@media(max-width:700px){.sidebar{background:#60435F!important}.primary,.btn-primary,button.primary,[type=submit]{min-height:44px}}
+</style>
+<style id="pehchaan-restored-ui-final">
+/* Restored consistent Pehchaan UI: original structure preserved, palette consolidated. */
+:root{--primary:#14213D!important;--primary-dark:#000814!important;--accent:#FCA311!important;--surface:#FFFFFF!important;--muted:#E5E5E5!important;--green:#14213D!important;--forest:#14213D!important;--mint:#E5E5E5!important;--success:#14213D!important;--focus:#FCA311!important;color-scheme:light}
+html,body{background:#FFFFFF!important;color:#000000!important;font-size:16px!important}
+body{line-height:1.55!important}
+.sidebar{background:#14213D!important;color:#FFFFFF!important}
+.sidebar *{color:inherit}
+.sidebar .nav button{color:#FFFFFF!important;background:transparent!important;border-color:transparent!important}
+.sidebar .nav button:hover,.sidebar .nav button.active{background:#000814!important;color:#FCA311!important;border-color:#FCA311!important}
+.brandmark{background:#FCA311!important;color:#14213D!important;border-radius:12px!important;display:grid!important;place-items:center!important}
+.brandmark i{color:#14213D!important}
+.app,.main,.content,.page{min-width:0}
+.panel,.card,.metric,.report-import-card,.toolbar,.tablewrap{background:#FFFFFF!important;border-color:#E5E5E5!important;color:#000000!important;box-shadow:0 3px 14px rgba(20,33,61,.05)}
+h1,h2,h3,h4,strong,b,label,th{color:#14213D}
+p,.sub,small,.muted{color:#4B5563}
+button,.btn{min-height:42px;font:inherit;cursor:pointer;transition:background-color .16s ease,border-color .16s ease,color .16s ease}
+.btn.primary,.primary,button[type=submit]{background:#14213D!important;color:#FFFFFF!important;border:1px solid #14213D!important}
+.btn.primary:hover,.primary:hover,button[type=submit]:hover{background:#FCA311!important;color:#000000!important;border-color:#FCA311!important}
+button:not(.nav button):hover,.btn:hover,.rowaction:hover,.textbtn:hover{border-color:#FCA311!important}
+a{color:#14213D!important}a:hover{color:#000000!important;background:#E5E5E5!important}
+input,select,textarea{font:inherit!important;color:#000000!important;background:#FFFFFF!important;border:1px solid #D1D5DB!important;border-radius:9px!important;min-height:42px;max-width:100%}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px solid #FCA311!important;outline-offset:2px!important;box-shadow:none!important}
+.tablewrap{width:100%;max-width:100%;overflow-x:auto!important;overscroll-behavior-inline:contain;border-radius:12px}
+#recordRows table{width:100%;min-width:760px;border-collapse:collapse}
+#recordRows th,#recordRows td{padding:15px 12px!important;border-bottom:1px solid #E5E5E5!important;text-align:left;vertical-align:middle}
+#recordRows th{font-size:13px!important;letter-spacing:.06em;text-transform:uppercase;color:#4B5563!important;background:#FFFFFF!important}
+#recordRows td:first-child{min-width:220px;max-width:320px;white-space:normal}
+.recordname,.recordlink{display:inline-block!important;color:#14213D!important;background:transparent!important;border:0!important;padding:3px 0!important;font-size:16px!important;font-weight:700!important;text-align:left!important;white-space:normal!important;overflow-wrap:anywhere;text-decoration:underline;text-decoration-color:#FCA311;text-underline-offset:3px;cursor:pointer}
+.recordname:hover,.recordlink:hover{color:#000000!important;background:#E5E5E5!important}
+.statusselect{max-width:170px!important;font-size:14px!important;font-weight:700!important;background:#E5E5E5!important;color:#14213D!important}
+.statusselect.unfamiliar{background:#FFF3D9!important;border-color:#FCA311!important;color:#14213D!important}
+.pill,.good,.success{background:#E5E5E5!important;color:#14213D!important;border-color:#E5E5E5!important}
+.warn,.warning,.attention,.review{background:#FFF3D9!important;color:#14213D!important;border-color:#FCA311!important}
+.danger,.flagged,.error{background:#E5E5E5!important;color:#000000!important;border-color:#14213D!important}
+.rowaction{background:#FFFFFF!important;color:#14213D!important;border:1px solid #FCA311!important;border-radius:8px!important;padding:9px 13px!important;white-space:nowrap}
+.rowaction:hover{background:#FCA311!important;color:#000000!important}
+.report-import-card{border:1px solid #E5E5E5!important;border-radius:14px!important;padding:18px!important;margin:14px 0!important}
+.report-import-head,.report-import-fields{min-width:0}
+.import-drop{background:#F8F8F8!important;border:1px dashed #9CA3AF!important;border-radius:12px!important}
+.import-number{background:#E5E5E5!important;color:#14213D!important}
+.remove-import,.report-file-item button{color:#14213D!important;background:transparent!important}
+.notice,.info-box,.tip,.success-box{background:#E5E5E5!important;border:1px solid #FCA311!important;color:#000000!important}
+@media(max-width:760px){.app{display:block}.sidebar{z-index:20}.main,.content{width:100%;max-width:100%;padding:18px!important}.toolbar{flex-wrap:wrap}.toolbar .search{width:100%;min-width:0!important}.report-import-fields{grid-template-columns:1fr!important}.report-import-card{padding:14px!important}.import-drop{flex-wrap:wrap}.import-file-summary{min-width:0;overflow-wrap:anywhere}.panel{padding:16px!important}#recordRows table{min-width:720px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+</style>
+<style id="pehchaan-readable-contrast-fix">
+/* Contrast repair: keep the selected black/navy/orange/grey/white palette and make all text readable. */
+:root{--ink:#000000!important;--muted:#4B5563!important;--line:#E5E5E5!important;--bg:#FFFFFF!important;--card:#FFFFFF!important;--green:#14213D!important;--forest:#14213D!important;--mint:#E5E5E5!important;--amber:#FFF3D9!important;--red:#E5E5E5!important}
+body,.main,.page,.panel,.metric,.source,.step,.report-option,.report-import-card,.demo-result{color:#000000!important}
+body p,body small,body .sub,body .muted,body .panelhead p,body .metric small,body .sourceinfo small,body .event p,body .settingsrow p,body .uploadzone p,body .category small,body .report-option p,body .report-file-item small,body .api-note,body .file-feedback-card{color:#4B5563!important;opacity:1!important}
+body h1,body h2,body h3,body h4,body strong,body b,body label,body th,body .metric-head,body .sourceinfo strong,body .event strong{color:#14213D!important;opacity:1!important}
+body .eyebrow,body .textbtn,body a{color:#14213D!important;opacity:1!important}
+body .pill,body .badge,body .tag{color:#14213D!important;opacity:1!important}
+body .sidebar{background:#14213D!important;color:#FFFFFF!important}
+body .sidebar *{opacity:1!important}
+body .sidebar .nav button{color:#FFFFFF!important}
+body .sidebar .nav button.active,body .sidebar .nav button:hover{background:#000814!important;color:#FCA311!important}
+body .welcome p,body .topbar small{color:#4B5563!important}
+body .api-note,body .notice,body .demo-disclaimer{background:#E5E5E5!important;color:#000000!important;border-color:#FCA311!important}
+body .uploadzone{background:#FFFFFF!important;border-color:#14213D!important;color:#000000!important}
+body .uploadzone:hover{background:#E5E5E5!important;border-color:#FCA311!important}
+body input::placeholder,body textarea::placeholder{color:#6B7280!important;opacity:1!important}
+body .metric-icon,body .sourceicon,body .avatar{background:#E5E5E5!important;color:#14213D!important}
+body .statusselect,body .rowaction{opacity:1!important}
+</style>
+<style id="pehchaan-final-layout-fix">
+.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:700px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+<script id="pehchaan-remove-under-review">document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.metric').forEach(function(card){if((card.innerText||'').toLowerCase().includes('under review'))card.remove();});});</script>
+<style id="responsive-layout-enhancements">
+/* Dashboard right-side gap fix — layout only, no JavaScript changes */
+#dashboard .contentgrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) !important;
+  width: 100%;
+  max-width: 100%;
+}
+#dashboard .contentgrid > .panel {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Responsive layout enhancements — preserve existing functionality */
+html { -webkit-text-size-adjust: 100%; }
+img, video, canvas, svg { max-width: 100%; }
+button, input, select, textarea { max-width: 100%; }
+.app { min-height: 100vh; min-height: 100dvh; }
+.main { width: 100%; min-width: 0; }
+.page, .panel, .metric, .contentgrid > *, .metrics > *, .report-import-card,
+.report-import-fields > *, .report-box, .tablewrap, .toolbar { min-width: 0; }
+.tablewrap, .comparison-table-wrap { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+pre, code { overflow-wrap: anywhere; }
+
+/* Tablet */
+@media (max-width: 900px) {
+  .app { grid-template-columns: 76px minmax(0, 1fr) !important; }
+  .sidebar { padding: 20px 9px !important; }
+  .brand { justify-content: center; padding: 0 !important; }
+  .brandtext, .navlabel, .nav button .navtext, .privacy { display: none !important; }
+  .nav button { justify-content: center; padding: 12px 8px !important; }
+  .contentgrid { grid-template-columns: minmax(0, 1fr) !important; }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .profile-grid, .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .report-import-fields { grid-template-columns: minmax(0, 1fr) !important; }
+}
+
+/* Phone */
+@media (max-width: 600px) {
+  .app { grid-template-columns: 54px minmax(0, 1fr) !important; }
+  .sidebar { padding: 14px 5px !important; gap: 18px !important; }
+  .brandmark { width: 36px !important; height: 36px !important; }
+  .nav { gap: 4px !important; }
+  .nav button { min-height: 42px !important; padding: 10px 4px !important; border-radius: 9px !important; }
+  .main { padding: 17px 12px 28px !important; }
+  .topbar { align-items: flex-start; gap: 10px; margin-bottom: 20px !important; }
+  .topbar h1 { font-size: clamp(20px, 5vw, 26px) !important; overflow-wrap: anywhere; }
+  .user { padding: 5px 7px !important; gap: 6px !important; }
+  .user .usertext { display: none !important; }
+  .welcome { align-items: stretch !important; flex-direction: column !important; gap: 12px !important; }
+  .welcome h2 { font-size: clamp(20px, 5vw, 24px) !important; }
+  .actions { width: 100%; }
+  .actions .btn { flex: 1 1 auto; }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 9px !important; }
+  .metric { padding: 12px !important; }
+  .metric strong { font-size: clamp(22px, 6vw, 28px) !important; overflow-wrap: anywhere; }
+  .metric-head { gap: 6px; align-items: flex-start; }
+  .metric-icon { flex-shrink: 0; }
+  .panel { padding: 13px !important; border-radius: 13px !important; }
+  .panelhead { flex-wrap: wrap; }
+  .toolbar { align-items: stretch; }
+  .toolbar .search { min-width: 100% !important; flex-basis: 100%; }
+  .toolbar select, .toolbar .btn { flex: 1 1 auto; }
+  .tablewrap table { min-width: 680px; }
+  .steps { grid-template-columns: minmax(0, 1fr) !important; }
+  .profile-grid, .category-grid, .report-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .report-import-card { padding: 12px !important; }
+  .report-import-head { flex-wrap: wrap; }
+  .report-import-head > strong { min-width: 0; overflow-wrap: anywhere; }
+  .import-drop { flex-wrap: wrap; }
+  .import-file-summary { min-width: 0 !important; overflow-wrap: anywhere; }
+  .import-drop .btn { margin-left: 0 !important; }
+  .report-import-actions { align-items: stretch; }
+  .report-import-actions .btn { flex: 1 1 100%; }
+  .settingsrow { gap: 12px; }
+  .settingsrow > * { min-width: 0; }
+  .notice { align-items: flex-start; }
+  footer { overflow-wrap: anywhere; }
+}
+
+/* Very narrow phones */
+@media (max-width: 380px) {
+  .app { grid-template-columns: 46px minmax(0, 1fr) !important; }
+  .sidebar { padding-inline: 3px !important; }
+  .nav button span { width: auto !important; font-size: 17px !important; }
+  .main { padding-inline: 9px !important; }
+  .metrics { grid-template-columns: minmax(0, 1fr) !important; }
+  .actions { flex-direction: column; }
+  .actions .btn { width: 100%; }
+}
+</style>
+
+<style id="source-record-view-styles">
+.source-view-btn{flex-shrink:0;white-space:nowrap;min-height:38px!important;padding:8px 13px!important;font-size:12px!important;border:1px solid #FCA311!important;background:#FFFFFF!important;color:#14213D!important}
+.source-view-btn:hover{background:#FCA311!important;color:#000000!important}
+.source-record-modal{position:fixed;inset:0;z-index:1000;background:rgba(0,8,20,.62);display:grid;place-items:center;padding:18px}
+.source-record-modal[hidden]{display:none!important}.source-record-dialog{background:#fff;color:#000;width:min(760px,100%);max-height:min(82vh,760px);overflow:auto;border:1px solid #E5E5E5;border-radius:18px;padding:22px;box-shadow:0 22px 70px #0004}
+.source-record-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;border-bottom:1px solid #E5E5E5;padding-bottom:15px;margin-bottom:16px}.source-record-head h2{font-size:20px;margin:0;color:#14213D}.source-record-head p{margin:4px 0 0;color:#4B5563;font-size:12px}.source-record-close{border:0;background:#E5E5E5;color:#14213D;border-radius:9px;font-size:24px;width:38px;height:38px}.source-record-item{border:1px solid #E5E5E5;border-radius:12px;padding:13px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;gap:14px}.source-record-item strong{display:block;color:#14213D}.source-record-item small{display:block;color:#4B5563;margin-top:3px;overflow-wrap:anywhere}.source-record-item .btn{flex-shrink:0}.source-record-foot{border-top:1px solid #E5E5E5;margin-top:16px;padding-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#4B5563;font-size:11px}.source-record-empty{padding:20px;text-align:center;background:#F7F7F7;border-radius:12px;color:#4B5563}
+@media(max-width:600px){.source-record-dialog{padding:15px}.source-record-item{align-items:flex-start;flex-direction:column}.source-record-item .btn{width:100%}.source-record-foot{align-items:stretch;flex-direction:column}.source{flex-wrap:wrap}.sourceinfo{flex:1 1 calc(100% - 60px)}.source-view-btn{margin-left:51px}}
+</style>
+
+
+<style id="submitted-state-styles">
+.submission-success{padding:20px 6px 8px;text-align:center;max-width:760px;margin:0 auto}.submission-check{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;margin:0 auto 14px;background:#e5e5e5;color:#14213d;font-size:30px;font-weight:800;border:2px solid #fca311}.submission-success h3{font-size:24px;margin:0 0 8px;color:#14213d}.submission-success>p{color:#4b5563;margin:0 0 18px}.submission-summary{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:16px;text-align:left;margin:18px 0}.submission-summary p{margin:7px 0;color:#14213d;overflow-wrap:anywhere}.submission-summary small,.submission-note{color:#4b5563;font-size:13px}.submission-note{margin:0 0 18px!important}.report-box.submitted-state{padding:22px;background:#fff;border-color:#e5e5e5}#import .steps[hidden]{display:none!important}
+</style>
+
+<style id="pehchaan-final-readable-ui">
+:root{
+  color-scheme:light;
+  --ink:#14213D; --muted:#4B5563; --line:#D9DEE7; --bg:#F7F8FA; --card:#FFFFFF;
+  --navy:#14213D; --navy-deep:#0B132B; --orange:#FCA311; --orange-soft:#FFF3D9;
+  --grey:#E5E7EB; --teal:#DDF3EF; --shadow:0 8px 24px rgba(20,33,61,.07);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--bg)!important;color:#111827!important;font-size:16px!important;line-height:1.55!important}
+.app{min-height:100vh}
+.sidebar{background:var(--navy)!important;color:#fff!important;border-right:1px solid #263957!important}
+.sidebar *{opacity:1!important}
+.brand b,.brand small{color:#fff!important}
+.brandmark{background:var(--orange)!important;color:var(--navy)!important}
+.navlabel{color:#CBD5E1!important;font-size:12px!important}
+.nav button{color:#F8FAFC!important;font-size:14px!important;min-height:46px}
+.nav button.active,.nav button:hover{background:#263957!important;color:var(--orange)!important}
+.privacy{background:#0B132B!important;border:1px solid var(--orange)!important;color:#fff!important}
+.privacy strong{color:var(--orange)!important;font-size:14px!important}
+.privacy p{color:#E5E7EB!important;font-size:13px!important}
+.main{min-width:0;background:var(--bg)!important;padding:28px clamp(16px,3vw,42px) 40px!important}
+.topbar{align-items:center;flex-wrap:wrap}
+.topbar h1{color:var(--navy)!important;font-size:clamp(24px,3vw,32px)!important;line-height:1.2}
+.eyebrow{color:#7A4A00!important;font-size:12px!important;letter-spacing:.09em}
+h1,h2,h3,h4,strong,b,label,th{color:var(--navy)!important;opacity:1!important}
+p,small,.sub,.muted,.panelhead p,.welcome p,.metric small,.sourceinfo small,.event p,.settingsrow p,.uploadzone p,.category small,.report-option p,.report-file-item small{color:var(--muted)!important;opacity:1!important}
+.welcome h2{font-size:clamp(21px,2.5vw,27px)!important;line-height:1.25}
+.panel,.metric,.step,.source,.report-option,.report-import-card,.report-box,.demo-result{background:#fff!important;border:1px solid var(--line)!important;box-shadow:var(--shadow)!important;color:#111827!important}
+.panel{padding:clamp(15px,2vw,22px)!important;border-radius:16px!important}
+.metric{padding:18px!important;border-radius:15px!important}
+.metric-head{font-size:14px!important;color:#374151!important}
+.metric strong{font-size:32px!important;color:var(--navy)!important}
+.metric-icon,.sourceicon,.avatar,.import-number,.import-file-icon{background:var(--grey)!important;color:var(--navy)!important}
+.btn{min-height:44px!important;padding:11px 15px!important;border-radius:10px!important;font-size:14px!important;font-weight:750!important}
+.btn.primary,.primary,button[type=submit]{background:var(--navy)!important;color:#fff!important;border:1px solid var(--navy)!important}
+.btn.primary:hover,.primary:hover,button[type=submit]:hover{background:var(--orange)!important;color:#111827!important;border-color:var(--orange)!important}
+.btn.secondary,.secondary,.rowaction{background:#fff!important;color:var(--navy)!important;border:1px solid #C5CDD8!important}
+.btn.secondary:hover,.secondary:hover,.rowaction:hover{background:var(--orange-soft)!important;border-color:var(--orange)!important;color:#111827!important}
+.quiet{background:var(--orange-soft)!important;color:var(--navy)!important}
+.textbtn,.eyebrow,a{color:var(--navy)!important}
+.textbtn:hover,a:hover{color:#7A4A00!important}
+.pill{display:inline-flex;align-items:center;white-space:normal;line-height:1.35;font-size:12px!important;font-weight:750!important;padding:6px 9px!important;background:var(--grey)!important;color:var(--navy)!important;border-radius:8px!important}
+.pill.green,.good,.success{background:var(--teal)!important;color:#155E59!important}
+.pill.amber,.warn,.statusselect.unfamiliar{background:var(--orange-soft)!important;color:#704700!important;border:1px solid #F2C36B!important}
+.pill.red,.bad,.danger{background:#FDE8E7!important;color:#8A2424!important}
+.notice,.demo-disclaimer,.api-note,.file-feedback-card{font-size:14px!important;line-height:1.55!important;opacity:1!important}
+.notice,.demo-disclaimer{background:var(--orange-soft)!important;color:#3F321A!important;border:1px solid #F2C36B!important}
+.uploadzone{background:#fff!important;border:2px dashed #9AA7B8!important;border-radius:15px!important;padding:30px 18px!important}
+.uploadzone h3{font-size:21px!important}
+.uploadzone p{font-size:15px!important}
+input,select,textarea{font:inherit!important;color:#111827!important;background:#fff!important;border:1px solid #B8C1CE!important;border-radius:9px!important;min-height:44px;max-width:100%}
+input::placeholder,textarea::placeholder{color:#6B7280!important;opacity:1!important}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--orange)!important;outline-offset:2px!important;box-shadow:0 0 0 3px rgba(252,163,17,.18)!important}
+.search input{padding-left:38px!important}
+.toolbar{gap:10px}
+.toolbar select{color:#111827!important}
+.tablewrap{width:100%;max-width:100%;overflow-x:auto!important;border-radius:12px}
+table{width:100%;border-collapse:collapse}
+#recordRows table{min-width:700px}
+th{background:#F3F5F8!important;color:#374151!important;font-size:12px!important;letter-spacing:.04em!important;padding:14px 12px!important;white-space:normal!important}
+td{font-size:14px!important;color:#111827!important;padding:14px 12px!important;border-bottom:1px solid #E5E7EB!important;vertical-align:middle!important}
+.recordname,.recordlink{display:inline-block!important;color:var(--navy)!important;background:transparent!important;border:0!important;padding:3px 0!important;font-size:15px!important;font-weight:800!important;text-align:left!important;white-space:normal!important;overflow-wrap:anywhere;text-decoration:underline;text-decoration-color:var(--orange)!important;text-underline-offset:4px;cursor:pointer}
+.recordname:hover,.recordlink:hover{background:var(--orange-soft)!important;color:#111827!important}
+.statusselect{min-width:145px;max-width:180px!important;font-size:13px!important;font-weight:750!important;background:#E9EDF2!important;color:var(--navy)!important;border:1px solid #CDD4DE!important;padding:8px!important}
+.rowaction{font-size:13px!important;min-height:40px!important;padding:8px 11px!important}
+.report-import-card{padding:16px!important;border-radius:14px!important}
+.import-drop{background:#F7F8FA!important;border:1px dashed #AAB4C2!important}
+.report-file-item,.import-file-list .report-file-item{background:#F3F5F8!important;color:#111827!important}
+.report-file-item span{overflow-wrap:anywhere}
+.category{background:#fff!important;border-color:var(--line)!important}
+.category b{font-size:14px!important}
+.category small{font-size:12px!important}
+.profile-grid label{font-size:13px!important;color:#374151!important}
+.profile-grid input{color:#111827!important}
+.steps{gap:12px}
+.step b{font-size:15px!important}
+.step p{font-size:13px!important}
+.event time,footer{color:#6B7280!important}
+.toast{background:var(--navy)!important;color:#fff!important;border:1px solid var(--orange)!important;font-size:14px!important;max-width:min(420px,calc(100vw - 32px))}
+.empty{color:#4B5563!important;padding:24px!important}
+@media(max-width:1000px){.app{grid-template-columns:76px minmax(0,1fr)}.sidebar{padding:22px 9px}.brand{justify-content:center;padding:0}.brandtext,.navlabel,.nav .navtext,.privacy{display:none}.nav button{justify-content:center;padding:12px 8px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.contentgrid{grid-template-columns:1fr}}
+@media(max-width:760px){.app{display:block}.sidebar{position:sticky;top:0;z-index:20;display:flex;flex-direction:row;align-items:center;padding:8px 10px!important;gap:10px;overflow-x:auto}.brand{flex:0 0 auto}.brandtext{display:block}.brand b{font-size:16px!important}.brand small{font-size:10px!important}.sidebar>div:not(.brand){display:none}.sidebar .nav{display:flex;gap:5px}.sidebar>div:nth-child(2){display:block}.sidebar>div:nth-child(2) .navlabel{display:none}.sidebar>div:nth-child(2) .nav{display:flex}.sidebar .nav button{min-width:42px;min-height:42px;padding:8px}.sidebar .nav .navtext{display:none}.main{padding:18px 13px 30px!important}.topbar{margin-bottom:22px}.user .usertext{display:none}.welcome{align-items:flex-start;flex-direction:column}.actions{width:100%}.actions .btn{flex:1}.contentgrid{grid-template-columns:minmax(0,1fr)}.report-import-fields{grid-template-columns:1fr!important}.report-grid,.profile-grid,.category-grid,.steps{grid-template-columns:1fr!important}.toolbar .search{min-width:100%!important;width:100%}.toolbar select{flex:1}.panel{padding:15px!important}.report-import-card{padding:13px!important}.import-drop{flex-wrap:wrap}.import-file-summary{min-width:0;overflow-wrap:anywhere}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.metric{padding:13px!important}.metric strong{font-size:27px!important}}
+@media(max-width:380px){.brandtext{display:none}.metrics{grid-template-columns:1fr}.sidebar .nav button{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+
+<style id="pehchaan-ledger-actions-fix">
+#recordRows table{min-width:820px!important}
+#recordRows td:first-child{min-width:210px}
+#recordRows td:last-child{min-width:105px}
+#recordRows .rowaction{background:#14213D!important;color:#FFFFFF!important;border:1px solid #14213D!important}
+#recordRows .rowaction:hover{background:#FCA311!important;color:#111827!important;border-color:#FCA311!important}
+#recordRows .sub{display:block;margin-top:4px;font-size:12px;line-height:1.4}
+#guidanceBody{font-size:15px!important;line-height:1.65!important}
+#guidanceBody p{margin:10px 0!important;color:#263247!important}
+#guidanceBody a{display:inline-block;margin-top:4px;font-weight:800;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+@media(max-width:600px){#recordRows table{min-width:760px!important}}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style id="pehchaan-professional-final">
+html body{--ink:#0f172a!important;--muted:#64748b!important;--line:#e2e8f0!important;--bg:#f6f7fb!important;--card:#fff!important;--navy:#0f172a!important;--brand:#0d7a5f;--brand-600:#0a6650;--brand-50:#e8f5f0;--gold:#d97706;--gold-50:#fef6e7;--rose:#be123c;--rose-50:#fdecef;--shadow:0 1px 2px rgba(15,23,42,.04),0 6px 20px -8px rgba(15,23,42,.10)!important;
+ font-family:"Plus Jakarta Sans",ui-sans-serif,system-ui,sans-serif!important;background:var(--bg)!important;color:var(--ink)!important;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+html body button,html body input,html body select,html body textarea{font-family:inherit!important}
+html body .main{background:radial-gradient(1200px 400px at 80% -10%,#e9f4ef 0,transparent 60%),var(--bg)!important;padding:32px clamp(16px,3.5vw,48px) 56px!important}
+html body h1,html body h2,html body h3,html body h4,html body strong,html body b,html body th{color:var(--ink)!important}
+html body p,html body small,html body .sub,html body .panelhead p,html body .welcome p,html body .metric small,html body .sourceinfo small,html body .event p,html body .category small,html body .settingsrow p,html body .uploadzone p{color:var(--muted)!important}
+
+/* Sidebar */
+html body .sidebar{background:linear-gradient(180deg,#0b1324 0%,#0f1d33 100%)!important;border-right:1px solid #1e293b!important;padding:26px 16px!important;gap:28px!important}
+html body .sidebar .brand b{color:#fff!important;font-size:19px!important;font-weight:800!important;letter-spacing:-.02em!important}
+html body .sidebar .brand small{color:#94a3b8!important;font-size:11.5px!important}
+html body .brandmark{background:linear-gradient(135deg,#10b981,#0d7a5f)!important;color:#fff!important;border-radius:12px!important;box-shadow:0 6px 18px -6px rgba(16,185,129,.6)!important;font-size:18px!important}
+html body .sidebar .navlabel{color:#64748b!important;font-size:10.5px!important;letter-spacing:.14em!important;font-weight:700!important}
+html body .sidebar .nav button{color:#cbd5e1!important;background:transparent!important;border-radius:10px!important;padding:10px 12px!important;font-weight:600!important;font-size:13.5px!important;box-shadow:none!important;transition:background .15s,color .15s}
+html body .sidebar .nav button i{font-style:normal!important;color:inherit!important}
+html body .sidebar .nav button span{color:#64748b!important;font-size:15px!important}
+html body .sidebar .nav button:hover{background:rgba(148,163,184,.10)!important;color:#fff!important}
+html body .sidebar .nav button.active{background:rgba(16,185,129,.14)!important;color:#fff!important;box-shadow:inset 3px 0 0 #10b981!important}
+html body .sidebar .nav button.active span{color:#34d399!important}
+html body .privacy{background:rgba(148,163,184,.08)!important;border:1px solid rgba(148,163,184,.18)!important;border-radius:14px!important}
+html body .privacy strong{color:#e2e8f0!important;font-size:12.5px!important}
+html body .privacy p{color:#94a3b8!important;font-size:11.5px!important;line-height:1.55!important}
+
+/* Top bar */
+html body .topbar{margin-bottom:28px!important;padding-bottom:20px;border-bottom:1px solid var(--line)}
+html body .eyebrow{color:var(--brand)!important;font-size:11px!important;letter-spacing:.14em!important;font-weight:700!important}
+html body .topbar h1{font-size:clamp(24px,2.6vw,30px)!important;font-weight:800!important;letter-spacing:-.03em!important;color:var(--ink)!important}
+html body .user{background:#fff!important;border:1px solid var(--line)!important;border-radius:999px!important;padding:5px 14px 5px 5px!important;box-shadow:var(--shadow)!important}
+html body .avatar{background:linear-gradient(135deg,#0d7a5f,#10b981)!important;color:#fff!important;border-radius:999px!important;font-size:12px!important}
+html body .user b{font-size:13px!important}
+
+html body .welcome{margin-bottom:22px!important}
+html body .welcome h2{font-size:clamp(20px,2.2vw,24px)!important;font-weight:800!important;letter-spacing:-.025em!important}
+
+/* Buttons */
+html body .btn{min-height:40px!important;padding:9px 16px!important;border-radius:10px!important;font-size:13.5px!important;font-weight:650!important;transition:all .15s ease!important;letter-spacing:-.005em}
+html body .btn.primary,html body .primary,html body button[type=submit]{background:var(--brand)!important;color:#fff!important;border:1px solid var(--brand)!important;box-shadow:0 1px 0 rgba(255,255,255,.15) inset,0 4px 12px -4px rgba(13,122,95,.5)!important}
+html body .btn.primary:hover,html body .primary:hover{background:var(--brand-600)!important;border-color:var(--brand-600)!important;color:#fff!important;transform:translateY(-1px)}
+html body .btn.secondary,html body .secondary,html body .rowaction{background:#fff!important;color:var(--ink)!important;border:1px solid #cbd5e1!important;box-shadow:0 1px 2px rgba(15,23,42,.05)!important}
+html body .btn.secondary:hover,html body .secondary:hover,html body .rowaction:hover{background:#f8fafc!important;border-color:#94a3b8!important;color:var(--ink)!important}
+html body .quiet{background:var(--brand-50)!important;color:var(--brand)!important}
+html body .textbtn{color:var(--brand)!important;font-weight:700!important;font-size:12.5px!important}
+html body .textbtn:hover{color:var(--brand-600)!important;text-decoration:underline;text-underline-offset:3px}
+
+/* Cards */
+html body .panel,html body .metric,html body .step,html body .report-box,html body .report-import-card,html body .demo-result,html body .report-option{background:#fff!important;border:1px solid var(--line)!important;border-radius:16px!important;box-shadow:var(--shadow)!important;color:var(--ink)!important}
+html body .panel{padding:22px!important}
+html body .panelhead h3{font-size:15.5px!important;font-weight:750!important;letter-spacing:-.015em!important}
+html body .panelhead p{font-size:12.5px!important}
+html body .metric{padding:20px!important;position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s}
+html body .metric:hover{transform:translateY(-2px);box-shadow:0 12px 28px -12px rgba(15,23,42,.18)!important}
+html body .metric:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--brand)}
+html body .metric:nth-child(1):before{background:#3b82f6}
+html body .metric:nth-child(3):before{background:var(--gold)}
+html body .metric-head{font-size:12.5px!important;color:var(--muted)!important;font-weight:600!important;text-transform:uppercase;letter-spacing:.06em}
+html body .metric strong{font-size:34px!important;font-weight:800!important;letter-spacing:-.04em!important;color:var(--ink)!important;margin:10px 0 2px!important}
+html body .metric-icon,html body .sourceicon,html body .import-number,html body .import-file-icon{background:#f1f5f9!important;color:var(--ink)!important;border-radius:10px!important}
+html body .metric:nth-child(1) .metric-icon{background:#eff6ff!important;color:#1d4ed8!important}
+html body .metric:nth-child(2) .metric-icon{background:var(--brand-50)!important;color:var(--brand)!important}
+html body .metric:nth-child(3) .metric-icon{background:var(--gold-50)!important;color:var(--gold)!important}
+html body .source{border:1px solid var(--line)!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important;transition:border-color .15s,background .15s}
+html body .source:hover{border-color:#cbd5e1!important;background:#fafbfc!important}
+html body .source:nth-child(1) .sourceicon{background:#eff6ff!important;color:#1d4ed8!important}
+html body .source:nth-child(2) .sourceicon{background:var(--brand-50)!important;color:var(--brand)!important}
+html body .source:nth-child(3) .sourceicon{background:var(--gold-50)!important;color:var(--gold)!important}
+html body .source:nth-child(4) .sourceicon{background:#f5f3ff!important;color:#6d28d9!important}
+html body .event{border-bottom:1px solid #f1f5f9!important}
+
+/* Pills & status */
+html body .pill{font-size:11px!important;font-weight:700!important;padding:4px 10px!important;border-radius:999px!important;border:1px solid transparent!important;background:#f1f5f9!important;color:#334155!important;letter-spacing:.01em}
+html body .pill.green,html body .success{background:var(--brand-50)!important;color:#065f46!important;border-color:#bfe5d6!important}
+html body .pill.amber,html body .statusselect.unfamiliar{background:var(--gold-50)!important;color:#92400e!important;border-color:#f5d9a8!important}
+html body .pill.red,html body .statusselect.review{background:var(--rose-50)!important;color:#9f1239!important;border-color:#f8c6d1!important}
+html body .good{color:var(--brand)!important;background:transparent!important}
+html body .warn{color:#b45309!important;background:transparent!important;border:0!important}
+html body .bad{color:var(--rose)!important;background:transparent!important}
+
+/* Forms */
+html body input:not([type=checkbox]):not([type=radio]),html body select,html body textarea{background:#fff!important;color:var(--ink)!important;border:1px solid #cbd5e1!important;border-radius:10px!important;min-height:40px;transition:border-color .15s,box-shadow .15s}
+html body input:focus,html body select:focus,html body textarea:focus{outline:none!important;border-color:var(--brand)!important;box-shadow:0 0 0 4px rgba(13,122,95,.12)!important}
+html body button:focus-visible{outline:2px solid var(--brand)!important;outline-offset:2px!important;box-shadow:none!important}
+html body input[type=checkbox],html body input[type=radio],html body .toggle{accent-color:var(--brand)!important}
+html body .search input{background:#f8fafc!important;padding-left:38px!important}
+html body .profile-grid label{font-size:12.5px!important;font-weight:600!important;color:#334155!important}
+
+/* Table */
+html body .tablewrap{border:1px solid var(--line);border-radius:12px!important}
+html body th{background:#f8fafc!important;color:#64748b!important;font-size:11px!important;font-weight:700!important;letter-spacing:.08em!important;text-transform:uppercase;border-bottom:1px solid var(--line)!important}
+html body td{font-size:13.5px!important;color:#1e293b!important;border-bottom:1px solid #f1f5f9!important}
+html body tbody tr{transition:background .12s}
+html body tbody tr:hover td{background:#fafcfb!important}
+html body tbody tr:last-child td{border-bottom:0!important}
+html body .recordname,html body .recordlink{color:var(--ink)!important;font-size:14px!important;font-weight:700!important}
+html body .recordname:hover,html body .recordlink:hover{color:var(--brand)!important;background:transparent!important}
+html body .statusselect{background:#f1f5f9!important;color:#1e293b!important;border:1px solid #e2e8f0!important;border-radius:999px!important;font-size:12.5px!important;font-weight:650!important;padding:6px 12px!important;min-height:34px!important}
+
+/* Import / upload */
+html body .uploadzone,html body .import-drop{background:linear-gradient(180deg,#fbfdfc,#f4faf7)!important;border:1.5px dashed #9fd2bf!important;border-radius:16px!important;transition:border-color .15s,background .15s}
+html body .uploadzone:hover,html body .import-drop:hover{border-color:var(--brand)!important;background:#eef8f3!important}
+html body .uploadicon{background:var(--brand-50)!important;color:var(--brand)!important;border-radius:14px!important}
+html body .uploadzone h3{font-size:18px!important;font-weight:750!important}
+html body .uploadzone p{font-size:13.5px!important}
+html body .report-file-item,html body .import-file-list .report-file-item{background:#f8fafc!important;border:1px solid var(--line)!important;color:var(--ink)!important;border-radius:10px!important}
+html body .category{background:#fff!important;border:1px solid var(--line)!important;border-radius:12px!important;transition:border-color .15s,box-shadow .15s}
+html body .category:hover{border-color:#9fd2bf!important}
+html body .category:has(input:checked){border-color:var(--brand)!important;box-shadow:0 0 0 3px rgba(13,122,95,.10)!important;background:#fbfefc!important}
+html body .step span{color:var(--brand)!important}
+html body .notice,html body .demo-disclaimer{background:#fffbeb!important;border:1px solid #fde68a!important;color:#78350f!important;border-radius:12px!important}
+html body .notice b{color:#78350f!important}
+html body .file-feedback-card,html body .empty{background:#f8fafc!important;border:1px dashed #cbd5e1!important;color:var(--muted)!important;border-radius:12px!important}
+html body .toast{background:#0f172a!important;color:#fff!important;border-radius:12px!important;box-shadow:0 20px 40px -12px rgba(15,23,42,.45)!important}
+html body a{color:var(--brand)!important}
+html body ::selection{background:#bfe5d6}
+@media(max-width:700px){html body .sidebar{background:#0b1324!important}}
+</style>
+
+<style>
+html body .sidebar nav.nav button:not(.active){background:transparent!important;box-shadow:none!important}
+html body .sidebar nav.nav button:not(.active):hover{background:rgba(148,163,184,.10)!important}
+html body .welcome{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+html body .recordname,html body .recordlink{text-decoration:none!important;border-bottom:0!important;box-shadow:none!important}
+html body td .rowaction,html body td button.btn{background:#fff!important;color:var(--brand)!important;border:1px solid #9fd2bf!important;min-height:34px!important;padding:6px 14px!important;border-radius:999px!important;font-size:12.5px!important}
+html body td .rowaction:hover,html body td button.btn:hover{background:var(--brand)!important;color:#fff!important}
+</style>
+<style>
+html body .sidebar .nav,html body .sidebar nav{background:transparent!important;border:0!important;box-shadow:none!important}
+html body section.page,html body .page{background:transparent!important}
+html body section.page .welcome,html body .welcome>div{background:transparent!important}
+html body table tbody td button.rowaction{background:#fff!important;color:#0d7a5f!important;border:1px solid #9fd2bf!important;min-height:34px!important;padding:6px 14px!important;border-radius:999px!important;font-size:12.5px!important;box-shadow:none!important}
+html body table tbody td button.rowaction:hover{background:#0d7a5f!important;color:#fff!important}
+</style>
+<style id="pehchaan-vibrant-theme">
+html body{--brand:#0d9488;--brand-600:#0f766e;--brand-50:#e6f7f5}
+html body .main{background:radial-gradient(900px 380px at 100% -5%,#ffe4d6 0,transparent 60%),radial-gradient(800px 360px at 10% 0%,#d9f3ef 0,transparent 55%),#fbf9f6!important}
+html body .sidebar{background:linear-gradient(180deg,#0f2a3d 0%,#123e4a 55%,#0f4c44 100%)!important}
+html body .sidebar .nav button.active{background:linear-gradient(90deg,rgba(45,212,191,.28),rgba(45,212,191,.06))!important;box-shadow:inset 3px 0 0 #2dd4bf!important}
+html body .sidebar .nav button:nth-child(1) span{color:#60a5fa!important}
+html body .sidebar .nav button:nth-child(2) span{color:#2dd4bf!important}
+html body .sidebar .nav button:nth-child(3) span{color:#fbbf24!important}
+html body .sidebar .nav button:nth-child(4) span{color:#fb7185!important}
+html body .sidebar .nav button:nth-child(5) span{color:#a78bfa!important}
+html body .brandmark{background:linear-gradient(135deg,#f97316,#ec4899)!important;box-shadow:0 6px 18px -6px rgba(236,72,153,.6)!important}
+html body .avatar{background:linear-gradient(135deg,#f97316,#ec4899)!important}
+html body .eyebrow{background:linear-gradient(90deg,#0d9488,#f97316);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+html body .welcome h2{background:linear-gradient(90deg,#0f2a3d,#0d9488);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+html body .metric{border:0!important;color:#fff!important}
+html body .metric:before{display:none}
+html body .metric:nth-child(1){background:linear-gradient(135deg,#2563eb,#38bdf8)!important}
+html body .metric:nth-child(2){background:linear-gradient(135deg,#0d9488,#34d399)!important}
+html body .metric:nth-child(3){background:linear-gradient(135deg,#f97316,#f43f5e)!important}
+html body .metric strong,html body .metric small,html body .metric-head,html body .metric .good,html body .metric .warn{color:#fff!important}
+html body .metric small{opacity:.9}
+html body .metric .metric-icon{background:rgba(255,255,255,.22)!important;color:#fff!important}
+html body .metric:hover{box-shadow:0 18px 36px -14px rgba(15,42,61,.45)!important}
+html body .btn.primary,html body .primary{background:linear-gradient(135deg,#0d9488,#0f766e)!important;border-color:#0f766e!important}
+html body .btn.primary:hover,html body .primary:hover{background:linear-gradient(135deg,#f97316,#ec4899)!important;border-color:#ec4899!important}
+html body .panel{border-top:3px solid #2dd4bf!important}
+html body .contentgrid>.panel:nth-child(2){border-top-color:#f97316!important}
+html body .ledger{border-top-color:#a78bfa!important}
+html body th{background:linear-gradient(90deg,#ecfdf9,#fff4ec)!important;color:#0f766e!important}
+html body tbody tr:hover td{background:#f0fdfa!important}
+html body table tbody td button.rowaction{background:linear-gradient(135deg,#f97316,#ec4899)!important;color:#fff!important;border:0!important}
+html body table tbody td button.rowaction:hover{filter:brightness(1.08);background:linear-gradient(135deg,#ec4899,#f97316)!important}
+html body .uploadzone,html body .import-drop{background:linear-gradient(135deg,#ecfdf9,#fff4ec)!important;border-color:#5eead4!important}
+html body .event:nth-child(1) .eventdot{background:#f97316!important}
+html body .event:nth-child(2) .eventdot{background:#0d9488!important}
+html body .event:nth-child(3) .eventdot{background:#2563eb!important}
+html body .eventdot{box-shadow:0 0 0 4px rgba(13,148,136,.12)}
+</style>
+<style>
+html body #recordRows button.rowaction,html body #attentionList button.rowaction{background:linear-gradient(135deg,#f97316,#ec4899)!important;color:#fff!important;border:0!important;border-radius:999px!important;padding:6px 16px!important;min-height:34px!important;box-shadow:0 4px 12px -4px rgba(236,72,153,.5)!important}
+html body #recordRows button.rowaction:hover,html body #attentionList button.rowaction:hover{background:linear-gradient(135deg,#ec4899,#f97316)!important}
+</style>
+<style id="pehchaan-coolors-theme">
+html body{--palette-ink:#0d3b66;--palette-plum:#14507f;--palette-mauve:#ee964b;--palette-rose:#f95738;--palette-blush:#faf0ca;--palette-mint:#f4d35e;--palette-aqua:#ee964b;--palette-surface:#fdfbf4;--palette-soft:#f7f2e3;--palette-muted:#5b7a95;--palette-line:#e7dfc9;--palette-tint-1:rgba(249,87,56,.14);--palette-tint-2:rgba(244,211,94,.28);--palette-tint-3:rgba(250,240,202,.3);--palette-tint-4:rgba(249,87,56,.38);--palette-tint-5:rgba(238,150,75,.45);--palette-tint-6:rgba(238,150,75,.18);--palette-tint-7:rgba(249,87,56,.16);--palette-tint-8:rgba(244,211,94,.2);--palette-tint-9:rgba(244,211,94,.32);--palette-tint-10:rgba(250,240,202,.6);--palette-tint-11:rgba(249,87,56,.08);--palette-tint-12:rgba(255,255,255,.65);--palette-tint-13:rgba(249,87,56,.18);--palette-tint-14:rgba(249,87,56,.3);--palette-tint-15:rgba(255,255,255,.75);}
+html body{--c-black:var(--palette-ink);--c-olive:var(--palette-plum);--c-sage:var(--palette-mauve);--c-mint:var(--palette-mint);--c-aqua:var(--palette-aqua);--brand:var(--palette-rose);--brand-600:var(--palette-plum);--brand-50:var(--palette-blush);--ink:var(--palette-ink)!important;--muted:var(--palette-muted)!important;--line:var(--palette-line)!important}
+html body .main{background:radial-gradient(900px 380px at 100% -5%,rgba(244,211,94,.34) 0,transparent 60%),radial-gradient(820px 360px at 4% 0%,rgba(249,87,56,.12) 0,transparent 55%),var(--palette-surface)!important}
+html body p,html body small,html body .panelhead p,html body .welcome p,html body .sourceinfo small,html body .event p{color:var(--palette-muted)!important}
+/* Sidebar — deep navy */
+html body .sidebar{background:linear-gradient(180deg,#0d3b66 0%,#0a2f52 55%,#08243d 100%)!important;border-right:1px solid #0a2f52!important}
+html body .sidebar .navlabel{color:#9fc0dd!important}
+html body .sidebar .nav button{color:#dce8f4!important}
+html body .sidebar .nav button span{color:#9fc0dd!important}
+html body .sidebar .nav button:hover{background:rgba(250,240,202,.1)!important;color:#fff!important}
+html body .sidebar .nav button.active{background:rgba(250,240,202,.15)!important;box-shadow:inset 3px 0 0 var(--palette-rose)!important;color:var(--palette-blush)!important}
+html body .sidebar .nav button.active span{color:var(--palette-mint)!important}
+html body .privacy{background:rgba(250,240,202,.08)!important;border-color:rgba(250,240,202,.2)!important}
+html body .privacy strong{color:var(--palette-blush)!important}
+html body .privacy p{color:#a8c4dc!important}
+html body .brandmark,html body .avatar{background:linear-gradient(135deg,var(--palette-ink),var(--palette-mauve))!important;color:#fff!important;box-shadow:0 6px 18px -6px var(--palette-tint-5)!important}
+/* Headings */
+html body .eyebrow{background:none!important;color:var(--palette-rose)!important;-webkit-text-fill-color:var(--palette-rose)}
+html body .welcome h2{background:linear-gradient(90deg,var(--palette-ink),var(--palette-rose));-webkit-background-clip:text;background-clip:text;color:transparent!important}
+/* Metrics — cream, yellow, orange cards */
+html body .metric{background:#fff!important}
+html body .metric *{color:var(--palette-ink)!important}
+html body .metric:nth-child(1){background:linear-gradient(135deg,var(--palette-blush),#fdf6e2)!important}
+html body .metric:nth-child(2){background:linear-gradient(135deg,var(--palette-mint),#f8e39c)!important}
+html body .metric:nth-child(3){background:linear-gradient(135deg,#f9cfa8,#f3b277)!important}
+html body .metric:nth-child(4){background:linear-gradient(135deg,var(--palette-ink),#14507f)!important}
+html body .metric:nth-child(4) *{color:var(--palette-blush)!important}
+html body .metric .metric-icon{background:rgba(255,255,255,.85)!important;color:var(--palette-rose)!important}
+/* Buttons */
+html body .btn.primary,html body .primary{background:var(--palette-rose)!important;border-color:var(--palette-rose)!important;color:#fff!important;box-shadow:0 6px 16px -6px var(--palette-tint-4)!important}
+html body .btn.primary:hover,html body .primary:hover{background:var(--palette-ink)!important;border-color:var(--palette-ink)!important;color:#fff!important}
+html body .btn.secondary,html body .secondary{background:#fff!important;border-color:var(--palette-mauve)!important;color:var(--palette-ink)!important}
+html body .btn.secondary:hover,html body .secondary:hover{background:var(--palette-blush)!important;border-color:var(--palette-rose)!important}
+html body .textbtn,html body a{color:var(--palette-plum)!important}
+html body .recordlink:hover{color:var(--palette-rose)!important}
+html body #recordRows button.rowaction,html body #attentionList button.rowaction{background:var(--palette-ink)!important;color:var(--palette-blush)!important;box-shadow:0 4px 12px -4px var(--palette-tint-5)!important}
+html body #recordRows button.rowaction:hover,html body #attentionList button.rowaction:hover{background:var(--palette-rose)!important;color:#fff!important}
+/* Panels */
+html body .panel{background:#fff!important;border-color:var(--palette-line)!important;border-top:3px solid var(--palette-rose)!important}
+html body .contentgrid>.panel:nth-child(2){border-top-color:var(--palette-mint)!important}
+html body .ledger{border-top-color:var(--palette-mauve)!important}
+html body .user{background:#fff!important;border-color:var(--palette-line)!important}
+html body .source:nth-child(n) .sourceicon{background:var(--palette-blush)!important;color:var(--palette-ink)!important}
+html body .source:nth-child(even) .sourceicon{background:var(--palette-soft)!important;color:var(--palette-plum)!important}
+html body th{background:linear-gradient(90deg,var(--palette-blush),var(--palette-mint))!important;color:var(--palette-ink)!important}
+html body tbody tr:hover td{background:var(--palette-soft)!important}
+html body .search input,html body .toolbar select{background:#fff!important;border-color:var(--palette-line)!important;color:var(--palette-ink)!important}
+/* Status */
+html body .pill.green{background:var(--palette-ink)!important;color:var(--palette-blush)!important;border-color:var(--palette-ink)!important}
+html body .pill.amber{background:var(--palette-blush)!important;color:#7a5300!important;border-color:var(--palette-mint)!important}
+html body .statusselect.unfamiliar{background:#fdeae5!important;color:#a32c14!important;border-color:#f9b8a6!important}
+html body .statusselect{background:var(--palette-soft)!important;border-color:var(--palette-mauve)!important;color:var(--palette-ink)!important}
+html body .event:nth-child(1) .eventdot{background:var(--palette-rose)!important}
+html body .event:nth-child(2) .eventdot{background:var(--palette-mint)!important}
+html body .event:nth-child(3) .eventdot{background:var(--palette-mauve)!important}
+html body .eventdot{box-shadow:0 0 0 4px var(--palette-tint-2)!important}
+/* Forms & upload */
+html body input:focus,html body select:focus,html body textarea:focus{border-color:var(--palette-rose)!important;box-shadow:0 0 0 4px var(--palette-tint-7)!important}
+html body input[type=checkbox],html body input[type=radio]{accent-color:var(--palette-rose)!important}
+html body .uploadzone,html body .import-drop{background:linear-gradient(135deg,var(--palette-blush),#fdf6e2)!important;border-color:var(--palette-mauve)!important}
+html body .uploadzone small,html body .uploadzone p,html body .import-drop small,html body .import-drop p{color:var(--palette-ink)!important}
+html body .uploadicon{background:var(--palette-rose)!important;color:#fff!important}
+html body .category:has(input:checked){border-color:var(--palette-rose)!important;box-shadow:0 0 0 3px var(--palette-tint-7)!important;background:var(--palette-soft)!important}
+html body .step span{color:var(--palette-plum)!important}
+html body .toast{background:var(--palette-ink)!important;color:var(--palette-blush)!important}
+html body ::selection{background:var(--palette-mint)}
+</style>
+<style>html body .sidebar .nav button:nth-child(n) span{color:#9fc0dd!important}html body .sidebar .nav button.active:nth-child(n) span{color:var(--palette-mint)!important}</style>
+<style id="pehchaan-original-logo-preserved">
+/* The original Pehchaan logo (address-card mark + wordmark) is preserved and never hidden. */
+html body .brand{display:flex!important;visibility:visible!important;opacity:1!important}
+html body .brandmark{display:grid!important;place-items:center!important;width:39px!important;height:39px!important;border-radius:13px!important;background:linear-gradient(135deg,var(--palette-ink),var(--palette-mauve))!important;color:#fff!important}
+html body .brandmark i,html body .brandmark .fa-address-card{display:block!important;color:#fff!important;font-size:20px!important;line-height:1!important;visibility:visible!important;opacity:1!important}
+html body .brandtext{display:block!important}
+html body .sidebar .brand b,html body .brandtext b{color:var(--palette-blush)!important}
+html body .sidebar .brand small,html body .brandtext small{color:var(--palette-mint)!important}
+@media(max-width:1000px){html body .brandtext{display:none!important}}
+</style>
+<style id="pehchaan-final-pass">
+/* Final pass: keeps metric text dark on the cream/yellow/orange cards and the privacy note readable on the navy sidebar. */
+html body .metrics .metric{color:var(--palette-ink)!important}
+html body .metrics .metric strong,html body .metrics .metric small,html body .metrics .metric .metric-head,html body .metrics .metric small.good,html body .metrics .metric small.warn,html body .metrics .metric .good,html body .metrics .metric .warn{color:var(--palette-ink)!important;opacity:1!important}
+html body .metrics .metric:nth-child(4),html body .metrics .metric:nth-child(4) *{color:var(--palette-blush)!important}
+html body .metrics .metric .metric-icon{background:rgba(255,255,255,.85)!important;color:var(--palette-rose)!important}
+html body .sidebar .privacy{background:rgba(250,240,202,.09)!important;border:1px solid rgba(250,240,202,.22)!important;color:#dce8f4!important}
+html body .sidebar .privacy strong{color:var(--palette-blush)!important}
+html body .sidebar .privacy p{color:#c3d9ec!important}
+html body .sidebar .privacy:hover{background:rgba(250,240,202,.16)!important;border-color:var(--palette-mauve)!important}
+html body .tablewrap th{background:var(--palette-blush)!important;color:var(--palette-ink)!important}
+html body .uploadzone .uploadicon{display:grid!important;place-items:center!important;width:56px!important;height:56px!important;border-radius:18px!important;margin:0 auto 12px!important;font-size:24px!important;background:var(--palette-rose)!important;color:#fff!important}
+/* Keeps the whole sidebar reachable on short screens instead of clipping the privacy note. */
+html body .sidebar{position:sticky!important;top:0!important;height:100vh!important;overflow-y:auto!important}
+html body{background:var(--palette-surface)!important}
+html body .toggle{appearance:none!important;-webkit-appearance:none!important;position:relative!important;width:20px!important;height:20px!important;border-radius:6px!important;border:1.5px solid var(--palette-mauve)!important;background:#fff!important;flex-shrink:0!important}
+html body .toggle:checked{background:var(--palette-rose)!important;border-color:var(--palette-rose)!important}
+html body .toggle:checked:after{content:"✓"!important;position:absolute;inset:0;display:grid;place-items:center;color:#fff!important;font-size:13px!important;font-weight:800!important;line-height:1!important}
+html body .toggle:disabled{opacity:1!important;cursor:default!important}
+</style>
+</head><body>
+<div class="app">
+<aside class="sidebar">
+ <div class="brand"><div class="brandmark"><i class="fa-regular fa-address-card" aria-hidden="true"></i></div><div class="brandtext"><b>Pehchaan</b><small>Identity, in your control</small></div></div>
+ <div><div class="navlabel">WORKSPACE</div><nav class="nav">
+  <button class="active" data-page="dashboard"><span>▦</span><i class="navtext">Overview</i></button>
+  <button data-page="records"><span>▤</span><i class="navtext">Record ledger</i></button>
+  <button data-page="import"><span>⇧</span><i class="navtext">Import records</i></button>
+  <button data-page="actions"><span>↗</span><i class="navtext">Guided actions</i></button>
+  <button data-page="reports"><span>▧</span><i class="navtext">Evidence report</i></button>
+ </nav></div>
+ <div class="sidebottom"><div class="privacy"><strong>♧ &nbsp; Privacy-first review</strong><p>Files are processed locally in this demo. Do not upload real identity documents to this prototype.</p></div></div>
+</aside>
+<main class="main">
+<header class="topbar"><div><div class="eyebrow">PERSONAL IDENTITY AUDIT</div><h1 id="pageTitle">Overview</h1></div><div class="user"><div class="avatar">MM</div><div class="usertext"><b>Merlin Mendonsa</b><small>Personal workspace</small></div><span>⌄</span></div></header>
+<section class="page active" id="dashboard">
+ <div class="welcome"><div><h2>Your identity footprint</h2><p>Review the records you know about. Investigate anything that feels unfamiliar.</p></div><div class="actions"><button class="btn secondary" onclick="navigate('records')">Review ledger ↗</button><button class="btn primary" onclick="navigate('import')">＋ Add records</button></div></div>
+ <div class="metrics">
+  <div class="metric"><div class="metric-head">Records reviewed <span class="metric-icon" style="background:#e7f1ff">▤</span></div><strong id="totalCount">12</strong><small>Across your supported sources</small></div>
+  <div class="metric"><div class="metric-head">Recognized <span class="metric-icon" style="background:#e4f3e9">✓</span></div><strong id="knownCount">9</strong><small class="good">Marked as familiar</small></div>
+  <div class="metric"><div class="metric-head">Needs attention <span class="metric-icon" style="background:#fff2d8">⌕</span></div><strong id="attentionCount">2</strong><small class="warn">Verify before taking action</small></div>
+ </div>
+ <div class="contentgrid">
+  <div class="panel"><div class="panelhead"><div><h3>Connected record sources</h3><p>Sources you have reviewed or imported</p></div><button class="textbtn" onclick="navigate('import')">Manage sources →</button></div>
+   <div class="source-list connected-sources-list" aria-label="Connected record sources">
+    <div class="source"><div class="sourceicon" style="background:#e7f1ff">▤</div><div class="sourceinfo"><strong>Credit report</strong><small>Credit accounts and enquiries</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('credit')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#e4f3e9">₹</div><div class="sourceinfo"><strong>Income Tax AIS</strong><small>Financial and tax information</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('income-tax')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#fff2d8">▣</div><div class="sourceinfo"><strong>Identity documents</strong><small>Aadhaar and identity records</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('identity')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#f0eaff">₹</div><div class="sourceinfo"><strong>Banking records</strong><small>Accounts and financial activity</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('banking')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#e7f1ff">▤</div><div class="sourceinfo"><strong>Tax returns</strong><small>Returns and tax filings</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('tax-returns')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#e4f3e9">▥</div><div class="sourceinfo"><strong>Employment / EPFO</strong><small>Employment and provident fund records</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('employment')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#fff2d8">▣</div><div class="sourceinfo"><strong>Driving licence</strong><small>Driving licence details</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('driving')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#e7f1ff">▤</div><div class="sourceinfo"><strong>Vehicle registration</strong><small>Registered vehicles</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('vehicle')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#f0eaff">▧</div><div class="sourceinfo"><strong>Voter / electoral records</strong><small>Electoral roll information</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('voter')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#e4f3e9">▥</div><div class="sourceinfo"><strong>Mobile connections</strong><small>Review through Sanchar Saathi</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('telecom')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#fff2d8">⌂</div><div class="sourceinfo"><strong>Property / land records</strong><small>Property and land ownership records</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('property')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#e7f1ff">▣</div><div class="sourceinfo"><strong>Education records</strong><small>Academic and qualification records</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('education')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#e4f3e9">▦</div><div class="sourceinfo"><strong>Business / GST</strong><small>Business registration and GST records</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('business')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#f0eaff">§</div><div class="sourceinfo"><strong>Court records</strong><small>Case and court-related records</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('court')">View Record</button></div>
+    <div class="source"><div class="sourceicon" style="background:#fff2d8">＋</div><div class="sourceinfo"><strong>Other official reports</strong><small>Additional reports you import</small></div><button class="btn secondary source-view-btn" onclick="viewSourceRecords('other')">View Record</button></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="panel ledger"><div class="panelhead"><div><h3>Records needing a closer look</h3><p>Start with the entries you haven't recognised</p></div><button class="textbtn" onclick="navigate('records')">View all records →</button></div><div id="attentionList"></div></div>
+</section>
+<section class="page" id="records">
+ <div class="welcome"><div><h2>Your record ledger</h2><p>Review each entry and classify it as recognized or not recognized.</p></div></div>
+ <div id="ledgerCategoryNotice" class="notice" hidden style="margin:0 0 14px"><span>▤</span><div style="flex:1"><b id="ledgerCategoryTitle">Category records</b><span id="ledgerCategoryDescription">Showing records in this category.</span></div><button class="btn secondary" onclick="clearLedgerCategory()">Show all records</button></div>
+ <div class="panel"><div class="toolbar"><div class="search"><input id="searchInput" placeholder="Search records, sources or descriptions…" oninput="renderRecords()"></div><select id="statusFilter" onchange="renderRecords()"><option value="all">All statuses</option><option>Recognized</option><option>Not recognized</option></select><button class="btn secondary" onclick="exportCSV()">↓ Export CSV</button></div><div class="tablewrap"><table><thead><tr><th>Record</th><th>Source</th><th>Date</th><th>Status</th><th>Action</th></tr></thead><tbody id="recordRows"></tbody></table></div></div>
+ 
+</section>
+<section class="page" id="import">
+ <div class="welcome"><div><h2>Bring records together</h2><p>Import reports and review their entries.</p></div></div>
+ <div class="panel"><div class="uploadzone"><div class="uploadicon">⇧</div><h3>Import a supported file</h3><p>Choose a JSON, CSV, TXT, or PDF file for your personal record review.</p><input class="fileinput" type="file" id="filePicker" accept=".json,.csv,.txt,.pdf,application/pdf,text/plain,text/csv,application/json" onchange="handleFile(event)"><button class="btn primary" onclick="document.getElementById('filePicker').click()">Choose file</button><div id="fileFeedback" style="margin-top:12px;color:#64746a;font-size:12px"></div></div>
+ <div class="panel" style="margin-top:17px"><div class="panelhead"><div><h3>Demo identity profile</h3><p>Fictional details only — Aadhaar and PAN are required for the demo flow; other sources are optional.</p></div><span class="pill amber">SIMULATED</span></div>
+ <div class="profile-grid"><label>Full name<input id="demoName" value="Aarav Sharma" autocomplete="off"></label><label>Demo Aadhaar number<input id="demoAadhaar" value="XXXX XXXX 4821" autocomplete="off" maxlength="19"></label><label>Demo PAN<input id="demoPan" value="ABCPX1234Q" autocomplete="off" maxlength="10"></label></div>
+
+ <div class="panelhead" style="margin-top:22px"><div><h3>Choose records to explore</h3><p>Select any categories you want to review. This demo will show fictional records that a future authorized integration might return.</p></div></div>
+ <div class="category-grid"><label class="category"><input type="checkbox" class="demo-category" value="tax" checked><span><b>Income Tax / AIS</b><small>AIS, TIS and tax-related entries</small></span></label><label class="category"><input type="checkbox" class="demo-category" value="credit" checked><span><b>Credit information</b><small>Credit score, accounts and enquiries</small></span></label><label class="category"><input type="checkbox" class="demo-category" value="aadhaar" checked><span><b>Aadhaar-related checks</b><small>Masked profile and authentication history</small></span></label><label class="category"><input type="checkbox" class="demo-category" value="mobile"><span><b>Mobile connections</b><small>Connections the user can review</small></span></label><label class="category"><input type="checkbox" class="demo-category" value="vehicle"><span><b>Driving licence / vehicle</b><small>Optional transport records</small></span></label><label class="category"><input type="checkbox" class="demo-category" value="other"><span><b>Other official records</b><small>More sources may be added in future</small></span></label></div>
+ <div class="actions" style="margin-top:15px"><button class="btn primary" onclick="runDemoDiscovery()">Run fictional record discovery ↗</button><button class="btn secondary" onclick="clearDemoDiscovery()">Clear results</button></div>
+ <div id="discoveryResults" style="margin-top:17px"><div class="empty">Select categories and run the demo discovery to view sample records and comparison flags.</div></div></div>
+ <div class="report-box"><div class="panelhead"><div><h3>Already have a government report?</h3><p>Upload any reports you already have. You can add multiple files within the same category.</p></div><span class="pill green">Optional</span></div>
+ <div id="reportImports" class="report-imports" aria-live="polite"></div>
+ <div class="report-import-actions"><button class="btn primary" type="button" onclick="addReportImport()">＋ Add another import</button><button class="btn secondary" type="button" onclick="clearReportImports()">Clear all</button></div>
+ <div id="reportFeedback" class="file-feedback-card" aria-live="polite">No reports selected yet. Add an import and choose a category.</div>
+ <button class="btn primary submit-reports" type="button" onclick="submitReportImports()">Submit</button>
+ </div>
+ <div class="steps"><div class="step"><span>①</span><b>Choose a file</b><p>Use a sample or non-sensitive test file only.</p></div><div class="step"><span>②</span><b>Review the preview</b><p>Confirm what will be added before saving.</p></div><div class="step"><span>③</span><b>Classify entries</b><p>Mark them recognised, unfamiliar or needing review.</p></div></div></div>
+
+</section>
+<section class="page" id="actions">
+ <div class="welcome"><div><h2>Guided next steps</h2><p>Use official channels to verify a record and decide what to do next.</p></div></div>
+ <div class="contentgrid">
+  <div class="panel"><div class="panelhead"><div><h3>Choose a situation</h3><p>These are guidance routes, not automatic complaints.</p></div></div>
+   <div class="source-list">
+    <div class="source"><div class="sourceicon" style="background:#fff2d8">₹</div><div class="sourceinfo"><strong>Not recognized loan or credit enquiry</strong><small>Review your credit report and contact the lender or credit bureau.</small></div><button class="rowaction" onclick="showGuidance('credit')">View steps</button></div>
+    <div class="source"><div class="sourceicon" style="background:#e4f3e9">▤</div><div class="sourceinfo"><strong>Unexpected tax or AIS entry</strong><small>Compare the entry with your records and use the Income Tax portal.</small></div><button class="rowaction" onclick="showGuidance('tax')">View steps</button></div>
+    <div class="source"><div class="sourceicon" style="background:#e7f1ff">▣</div><div class="sourceinfo"><strong>Unknown mobile connection</strong><small>Check connections issued in your name through Sanchar Saathi.</small></div><button class="rowaction" onclick="showGuidance('mobile')">View steps</button></div>
+    <div class="source"><div class="sourceicon" style="background:#f0eaff">♙</div><div class="sourceinfo"><strong>Not recognized Aadhaar authentication</strong><small>Review available history through UIDAI's official service.</small></div><button class="rowaction" onclick="showGuidance('aadhaar')">View steps</button></div>
+   </div>
+  </div>
+  <div class="panel"><div class="panelhead"><div><h3 id="guidanceTitle">Before you act</h3><p>Suggested checklist</p></div></div><div id="guidanceBody" style="color:var(--muted);font-size:12px"><p>1. Open the original official source.</p><p>2. Check dates, amounts and identifiers carefully.</p><p>3. Save only the evidence you need.</p><p>4. Contact the relevant institution through its verified website or helpline.</p><p>5. Record your reference number and follow-up date.</p></div><button class="btn secondary" onclick="copyGuidance()">Copy checklist</button></div>
+ </div>
+ <div class="notice"><span>ⓘ</span><div><b>Stay safe from follow-up scams.</b>Never share OTPs, passwords, PINs or full identity numbers with an unverified caller. Verify contact details independently on the official website.</div></div>
+</section>
+<section class="page" id="reports">
+ <div class="welcome"><div><h2>Your review evidence pack</h2><p>Export a dated snapshot of the ledger and your review statuses.</p></div><button class="btn primary" onclick="downloadReport()">↓ Download report</button></div>
+ <div class="contentgrid"><div class="panel"><div class="panelhead"><div><h3>Report contents</h3><p>Generated from the entries in this prototype</p></div></div><div class="source-list"><div class="source"><div class="sourceicon" style="background:#e4f3e9">✓</div><div class="sourceinfo"><strong>Reviewed findings</strong><small>Names, sources, dates and statuses</small></div></div><div class="source"><div class="sourceicon" style="background:#e7f1ff">▤</div><div class="sourceinfo"><strong>Review annotations</strong><small>Current classifications and follow-up notes</small></div></div><div class="source"><div class="sourceicon" style="background:#fff2d8">◷</div><div class="sourceinfo"><strong>Generated date</strong><small id="reportDate"></small></div></div></div></div><div class="panel"><div class="panelhead"><div><h3>Important limitation</h3><p>What this export does and does not mean</p></div></div><p style="color:var(--muted);font-size:12px">This report records your review. It is not an official credit report, proof of identity theft, or a guarantee that every relevant record has been found. Verify any concern with the original institution.</p></div></div>
+ <div class="panel ledger"><div class="panelhead"><div><h3>Current ledger summary</h3><p>Counts update as you classify records</p></div></div><div id="reportSummary"></div></div>
+</section>
+<footer>PEHCHAAN · Know what your identity records reveal · OrbitX demo prototype</footer>
+</main>
+</div>
+<div id="sourceRecordModal" class="source-record-modal" role="dialog" aria-modal="true" aria-labelledby="sourceRecordTitle" hidden>
+ <div class="source-record-dialog"><div class="source-record-head"><div><h2 id="sourceRecordTitle">Uploaded records</h2><p id="sourceRecordSubtitle">Files selected in this browser session</p></div><button class="source-record-close" onclick="closeSourceRecords()" aria-label="Close">×</button></div><div id="sourceRecordBody"></div><div class="source-record-foot"><span>Files stay in this browser prototype; no external verification is performed.</span><button class="btn secondary" onclick="closeSourceRecords()">Close</button></div></div>
+</div><div class="toast" id="toast"></div>
+<script>
+const seed=[
+{id:1,name:'Personal loan · ABC Bank',source:'Credit report',date:'2026-10-22',status:'Not recognized',detail:'Demo entry — verify with the original credit bureau and lender.'},
+{id:2,name:'XYZ Financial Services',source:'Credit report',date:'2026-10-21',status:'Recognized',detail:'Demo entry — familiar financial record.'},
+{id:3,name:'New interest source',source:'Income Tax AIS',date:'2026-10-20',status:'Not recognized',detail:'Demo entry — compare with your tax documents.'},
+{id:4,name:'Salary information',source:'Income Tax AIS',date:'2026-10-18',status:'Recognized',detail:'Demo entry — familiar tax information.'},
+{id:5,name:'UIDAI service agency',source:'Aadhaar authentication',date:'2026-10-16',status:'Not recognized',detail:'Demo entry — check available authentication history.'},
+{id:6,name:'Mobile connection · 98XXXX3210',source:'Sanchar Saathi',date:'2026-10-14',status:'Recognized',detail:'Demo entry — fictional masked number.'},
+{id:7,name:'Credit enquiry · Demo Finance',source:'Credit report',date:'2026-10-11',status:'Recognized',detail:'Demo entry — confirm it matches an application you made.'},
+{id:8,name:'Business-related information',source:'Income Tax AIS',date:'2026-10-09',status:'Recognized',detail:'Demo entry — compare with available official records.'},
+{id:9,name:'Savings account interest',source:'Income Tax AIS',date:'2026-10-05',status:'Recognized',detail:'Demo entry — familiar interest information.'},
+{id:10,name:'Retail credit account',source:'Credit report',date:'2026-10-02',status:'Recognized',detail:'Demo entry — fictional sample account.'},
+{id:11,name:'Aadhaar authentication event',source:'Aadhaar authentication',date:'2026-09-28',status:'Recognized',detail:'Demo entry — check dates against the official history.'},
+{id:12,name:'Telecom connection review',source:'Sanchar Saathi',date:'2026-09-22',status:'Recognized',detail:'Demo entry — check current connection details.'}
+];let records=seed.map(x=>({...x}));let nextId=13;let lastGuidance='';let ledgerCategoryFilter=null;
+function navigate(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===page));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));const names={dashboard:'Overview',records:'Record ledger',import:'Import records',actions:'Guided actions',reports:'Evidence report'};document.getElementById('pageTitle').textContent=names[page]||'Overview';if(page==='records')renderRecords();if(page==='dashboard')renderAttention();if(page==='reports')renderReport();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2800)}
+function counts(){return {known:records.filter(r=>r.status==='Recognized').length,unfamiliar:records.filter(r=>r.status==='Not recognized').length,review:0}}
+function updateMetrics(){let c=counts();document.getElementById('totalCount').textContent=records.length;document.getElementById('knownCount').textContent=c.known;document.getElementById('attentionCount').textContent=c.unfamiliar;document.getElementById('reviewCount').textContent=c.review}
+function statusClass(s){return s==='Recognized'?'':'unfamiliar'}
+function statusPill(s){return s==='Recognized'?'green':'amber'}
+function reportCategoryForRecord(r){const t=(r.source+' '+r.name).toLowerCase();if(t.includes('credit')||t.includes('loan')||t.includes('bank')||t.includes('savings'))return 'credit';if(t.includes('tax')||t.includes('ais')||t.includes('salary')||t.includes('interest'))return 'income-tax';if(t.includes('aadhaar')||t.includes('uidai')||t.includes('identity'))return 'identity';if(t.includes('mobile')||t.includes('telecom')||t.includes('sanchar'))return 'telecom';return 'other'}
+function renderRecords(){let q=(document.getElementById('searchInput')?.value||'').toLowerCase(),f=document.getElementById('statusFilter')?.value||'all';let rows=records.filter(r=>(!ledgerCategoryFilter||reportCategoryForRecord(r)===ledgerCategoryFilter)&&(f==='all'||r.status===f)&&[r.name,r.source,r.detail].join(' ').toLowerCase().includes(q));document.getElementById('recordRows').innerHTML=rows.map(r=>`<tr><td><button class="recordname recordlink" onclick="openRecord(${r.id})">${esc(r.name)}</button></td><td>${esc(r.source)}</td><td>${esc(r.date||'—')}</td><td><select class="statusselect ${statusClass(r.status)}" aria-label="Status for ${esc(r.name)}" onchange="changeStatus(${r.id},this.value)"><option ${r.status==='Recognized'?'selected':''}>Recognized</option><option ${r.status==='Not recognized'?'selected':''}>Not recognized</option></select></td><td class="ledger-actions"><button class="rowaction" onclick="viewSourceRecordsForLedger(${r.id})">View Report</button>${r.status==='Not recognized'?` <button class="rowaction" onclick="openSolution(${r.id})">Actions</button>`:''}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">No records match this category and search.</td></tr>';updateMetrics();const notice=document.getElementById('ledgerCategoryNotice');if(notice){notice.hidden=!ledgerCategoryFilter;if(ledgerCategoryFilter){const labels={'credit':'Credit reports & financial records','income-tax':'Income Tax / AIS records','identity':'Identity / Aadhaar records','telecom':'Mobile connection records','other':'Other records'};document.getElementById('ledgerCategoryTitle').textContent=labels[ledgerCategoryFilter]||'Category records';document.getElementById('ledgerCategoryDescription').textContent=`Showing ${rows.length} record(s) in this category.`;}}}
+function viewSourceRecordsForLedger(id){const r=records.find(x=>x.id===id);if(!r)return;ledgerCategoryFilter=reportCategoryForRecord(r);const search=document.getElementById('searchInput');if(search)search.value='';const status=document.getElementById('statusFilter');if(status)status.value='all';navigate('records');toast('Showing all records in '+(document.getElementById('ledgerCategoryTitle')?.textContent||'this category')+'.')}
+function clearLedgerCategory(){ledgerCategoryFilter=null;const search=document.getElementById('searchInput');if(search)search.value='';renderRecords();}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function changeStatus(id,s){let r=records.find(x=>x.id===id);if(r){r.status=s==='Recognized'?'Recognized':'Not recognized';renderRecords();renderAttention();renderReport();toast('Record status updated.');}}
+function openRecord(id){viewRecord(id)}
+function viewRecord(id){let r=records.find(x=>x.id===id);if(r)alert(`${r.name}\\nSource: ${r.source}\\nDate: ${r.date}\\nStatus: ${r.status}\\n\\n${r.detail}\\n\\nThis is fictional demo data. Verify any concern with the original source.`)}
+function openSolution(id){const r=records.find(x=>x.id===id);if(!r)return;if(r.status!=='Not recognized'){toast('Actions are available for records marked Not recognized.');return;}let type='credit';const text=(r.source+' '+r.name).toLowerCase();if(text.includes('tax')||text.includes('ais')||text.includes('interest source')||text.includes('salary information'))type='tax';else if(text.includes('aadhaar')||text.includes('uidai'))type='aadhaar';else if(text.includes('mobile')||text.includes('telecom')||text.includes('sanchar'))type='mobile';else if(text.includes('vehicle')||text.includes('driving'))type='vehicle';else if(text.includes('property')||text.includes('land'))type='property';else if(text.includes('voter')||text.includes('electoral'))type='voter';else if(text.includes('bank')||text.includes('savings account'))type='banking';else if(text.includes('gst')||text.includes('business'))type='business';navigate('actions');showGuidance(type);const title=document.getElementById('guidanceTitle');if(title)title.textContent=`${r.name} — ${document.getElementById('guidanceTitle').textContent}`;const body=document.getElementById('guidanceBody');if(body)body.insertAdjacentHTML('afterbegin',`<div class="notice"><span>ⓘ</span><div><b>Selected record</b><br>${esc(r.name)} · ${esc(r.source)} · ${esc(r.date||'Date not provided')}<br>Review the original source before taking action.</div></div>`);window.scrollTo({top:0,behavior:'smooth'});}
+function renderAttention(){let arr=records.filter(r=>r.status==='Not recognized').slice(0,4);document.getElementById('attentionList').innerHTML=arr.length?`<div class="tablewrap"><table><thead><tr><th>Record</th><th>Source</th><th>Status</th><th></th></tr></thead><tbody>${arr.map(r=>`<tr><td><button class="recordname recordlink" onclick="openRecord(${r.id})">${esc(r.name)}</button></td><td>${esc(r.source)}</td><td><span class="pill ${statusPill(r.status)}">${esc(r.status)}</span></td><td><button class="rowaction" onclick="openSolution(${r.id})">Actions</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Nothing currently needs attention in this demo. Keep reviewing records periodically.</div>';updateMetrics()}
+
+let directlyUploadedFiles=[];
+const sourceViewLabels={
+ 'credit':'Credit report','income-tax':'Income Tax AIS','identity':'Identity documents','banking':'Banking records','tax-returns':'Tax returns','employment':'Employment / EPFO','driving':'Driving licence','vehicle':'Vehicle registration','voter':'Voter / electoral records','telecom':'Mobile connections','property':'Property / land records','education':'Education records','business':'Business / GST','court':'Court records','other':'Other official reports'
+};
+const sourceCategoryAliases={
+ 'credit':['credit','banking'],'income-tax':['income-tax','tax-returns'],'identity':['identity'],'banking':['banking','credit'],'tax-returns':['tax-returns','income-tax'],'employment':['employment'],'driving':['driving'],'vehicle':['vehicle'],'voter':['voter'],'telecom':['telecom'],'property':['property'],'education':['education'],'business':['business'],'court':['court'],'other':['other']
+};
+const sourceRecordKeywords={
+ 'credit':['credit','loan','bank','finance','enquiry','account'],'income-tax':['tax','ais','interest','salary'],'identity':['aadhaar','uidai','identity'],'banking':['bank','savings','account','interest','financial'],'tax-returns':['tax','ais','return','filing'],'employment':['employment','epfo','provident','salary','employer'],'driving':['driving','licence','license'],'vehicle':['vehicle','registration','car'],'voter':['voter','electoral','election'],'telecom':['mobile','telecom','sanchar','connection'],'property':['property','land','ownership'],'education':['education','academic','qualification','school','university'],'business':['business','gst','company'],'court':['court','case','judicial'],'other':[]
+};
+function viewSourceRecords(category){
+ const title=sourceViewLabels[category]||'Uploaded records';
+ const aliases=sourceCategoryAliases[category]||[category];
+ const matchingImports=reportImports.filter(item=>aliases.includes(item.category));
+ const files=matchingImports.flatMap(item=>item.files.map(entry=>({name:entry.name,size:entry.size,type:entry.type,file:entry.file,category:item.category,kind:'uploaded'})));
+ const genericFiles=directlyUploadedFiles.filter(f=>!f.category||f.category===category);
+ const keywords=sourceRecordKeywords[category]||[];
+ const relatedRecords=records.filter(r=>{const text=(r.source+' '+r.name+' '+r.detail).toLowerCase();return keywords.length>0&&keywords.some(word=>text.includes(word));});
+ document.getElementById('sourceRecordTitle').textContent=title+' — View Record';
+ document.getElementById('sourceRecordSubtitle').textContent='Uploaded files and matching ledger entries';
+ const allImportFiles=reportImports.flatMap(item=>item.files);
+ const fileHtml=files.concat(genericFiles).map(f=>{const directIndex=directlyUploadedFiles.indexOf(f);const reportIndex=allImportFiles.findIndex(x=>x.file===f.file);return `<div class="source-record-item"><div><strong>📄 ${esc(f.name)}</strong><small>${(f.size/1024).toFixed(1)} KB · Uploaded locally · Not verified</small></div><button class="btn primary" onclick="openUploadedFile(${directIndex>=0?directIndex:'null'},${reportIndex},'${esc(f.name).replace(/'/g,'&#39;')}')">Open file</button></div>`;}).join('');
+ const recordHtml=relatedRecords.map(r=>`<div class="source-record-item"><div><strong>${esc(r.name)}</strong><small>${esc(r.source)} · ${esc(r.date||'Date not provided')} · ${esc(r.status)}<br>${esc(r.detail)}</small></div><button class="btn secondary" onclick="closeSourceRecords();openRecord(${r.id})">View details</button></div>`).join('');
+ document.getElementById('sourceRecordBody').innerHTML=(fileHtml?`<h3>Uploaded files (${files.length+genericFiles.length})</h3>${fileHtml}`:'')+(recordHtml?`<h3 style="margin-top:18px">Related ledger records (${relatedRecords.length})</h3>${recordHtml}`:'')+(!fileHtml&&!recordHtml?'<div class="source-record-empty">No report or matching ledger record is available for this category yet. Go to <b>Import records</b>, select this category, and upload a report to view it here.</div>':'');
+ document.getElementById('sourceRecordModal').hidden=false;document.body.style.overflow='hidden';
+}
+function openUploadedFile(directIndex,reportIndex,name){let f=null;if(Number.isInteger(directIndex)&&directIndex>=0)f=directlyUploadedFiles[directIndex]?.file;if(!f&&Number.isInteger(reportIndex)&&reportIndex>=0){const list=reportImports.flatMap(item=>item.files);f=list[reportIndex]?.file;}if(!f){toast('The selected file is no longer available. Please upload it again.');return;}const url=URL.createObjectURL(f);const tab=window.open(url,'_blank');if(tab){tab.opener=null;}else{const a=document.createElement('a');a.href=url;a.download=name||f.name;a.click();}setTimeout(()=>URL.revokeObjectURL(url),60000);}
+function closeSourceRecords(){document.getElementById('sourceRecordModal').hidden=true;document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.getElementById('sourceRecordModal').hidden)closeSourceRecords();});
+function handleFile(e){const f=e.target.files[0];if(!f)return;directlyUploadedFiles.push({name:f.name,size:f.size,type:f.type,file:f});document.getElementById('fileFeedback').textContent=`Uploaded locally: ${f.name} · ${(f.size/1024).toFixed(1)} KB. You can open it from View Record where it matches a source; no server upload or government verification is performed.`;toast('File added to local record viewer.')}
+const reportCategories = [
+ ['income-tax','Income Tax / AIS'],['tax-returns','Tax Returns'],['identity','Identity Documents'],['credit','Credit Reports'],['banking','Banking Records'],['employment','Employment / EPFO'],['driving','Driving Licence'],['vehicle','Vehicle Registration'],['voter','Voter / Electoral Records'],['telecom','Mobile Connections'],['property','Property / Land Records'],['education','Education Records'],['business','Business / GST'],['court','Court Records'],['other','Other Official Reports']
+];
+let reportImports = [];
+let nextImportId = 1;
+function addReportImport(){reportImports.push({id:nextImportId++,category:'income-tax',files:[]});renderReportImports();}
+function renderReportImports(){const root=document.getElementById('reportImports');if(!root)return;root.innerHTML=reportImports.map((item,index)=>`<div class="report-import-card" data-import-id="${item.id}"><div class="report-import-head"><span class="import-number">${String(index+1).padStart(2,'0')}</span><strong>Import ${index+1}</strong><button type="button" class="remove-import" onclick="removeReportImport(${item.id})">Remove import ×</button></div><div class="report-import-fields"><label class="import-category"><b>1. Choose report category</b><select aria-label="Choose report category for import ${index+1}" onchange="setImportCategory(${item.id},this.value)">${reportCategories.map(([value,label])=>`<option value="${value}" ${item.category===value?'selected':''}>${label}</option>`).join('')}</select></label><div class="import-files"><b>2. Upload file(s)</b><div class="import-drop"><span class="import-file-icon">📄</span><div class="import-file-summary"><strong>${item.files.length} file${item.files.length===1?'':'s'} selected</strong><small>${item.files.length?item.files.map(f=>esc(f.name)).join(' · '):'PDF, CSV, JSON or TXT · Selected locally only'}</small></div><button class="btn primary" type="button" onclick="chooseImportFiles(${item.id})">Add file(s)</button></div><div class="import-file-list">${item.files.map((f,i)=>`<div class="report-file-item"><span>♙ ${esc(f.name)}<small>${(f.size/1024).toFixed(1)} KB · Selected locally, not verified</small></span><button type="button" aria-label="Remove ${esc(f.name)}" onclick="removeImportFile(${item.id},${i})">×</button></div>`).join('')}</div></div></div></div>`).join('');updateReportFeedback();}
+function setImportCategory(id,value){const item=reportImports.find(x=>x.id===id);if(item)item.category=value;}
+function removeReportImport(id){reportImports=reportImports.filter(x=>x.id!==id);renderReportImports();}
+function clearReportImports(){reportImports=[];renderReportImports();document.getElementById('reportFeedback').textContent='No reports selected yet. Add an import and choose a category.';}
+function chooseImportFiles(id){const input=document.createElement('input');input.type='file';input.multiple=true;input.accept='.pdf,.csv,.json,.txt,application/pdf,text/plain,text/csv,application/json';input.onchange=()=>{const item=reportImports.find(x=>x.id===id);if(!item)return;for(const f of Array.from(input.files||[])){if(f.size>20*1024*1024){toast(`${f.name} exceeds the 20 MB demo limit.`);continue;}item.files.push({name:f.name,size:f.size,type:f.type,file:f});}renderReportImports();toast('Files selected locally for demo review.');};input.click();}
+function removeImportFile(id,index){const item=reportImports.find(x=>x.id===id);if(item){item.files.splice(index,1);renderReportImports();}}
+function updateReportFeedback(){const total=reportImports.reduce((n,item)=>n+item.files.length,0);const cats=new Set(reportImports.filter(x=>x.files.length).map(x=>x.category));const el=document.getElementById('reportFeedback');if(el)el.textContent=total?`${total} file${total===1?'':'s'} selected across ${cats.size} categor${cats.size===1?'y':'ies'} in ${reportImports.length} import${reportImports.length===1?'':'s'}. Files are listed locally; no government verification has occurred.`:`${reportImports.length} import${reportImports.length===1?'':'s'} ready. Choose a category and add files, or add another import.`;}
+function submitReportImports(){const files=reportImports.reduce((n,item)=>n+item.files.length,0);if(!files){toast('Add at least one report file before submitting.');return;}const submitted=reportImports.filter(item=>item.files.length);const summary=submitted.map(item=>`${reportCategories.find(x=>x[0]===item.category)?.[1]||item.category}: ${item.files.length} file(s)`).join(' · ');const box=document.querySelector('#import .report-box');if(!box)return;box.classList.add('submitted-state');box.innerHTML=`<div class="submission-success" role="status" aria-live="polite"><div class="submission-check" aria-hidden="true">✓</div><h3>Reports submitted successfully</h3><p>Your reports have been added to the demo review flow.</p><div class="submission-summary"><strong>Submitted reports</strong><p>${esc(summary)}</p><small>${files} file(s) submitted · Saved for this browser session only</small></div><p class="submission-note">Demo prototype only: files remain in this browser session. No government API was called and the reports have not been officially verified.</p><button type="button" class="btn secondary" onclick="resetReportSubmission()">＋ Submit more reports</button></div>`;const steps=document.querySelector('#import .steps');if(steps)steps.hidden=true;toast('Reports submitted.');}
+function resetReportSubmission(){const box=document.querySelector('#import .report-box');if(!box)return;box.classList.remove('submitted-state');box.innerHTML=`<div class="panelhead"><div><h3>Already have a government report?</h3><p>Upload any reports you already have. You can add multiple files within the same category.</p></div><span class="pill green">Optional</span></div><div id="reportImports" class="report-imports" aria-live="polite"></div><div class="report-import-actions"><button class="btn primary" type="button" onclick="addReportImport()">＋ Add another import</button><button class="btn secondary" type="button" onclick="clearReportImports()">Clear all</button></div><div id="reportFeedback" class="file-feedback-card" aria-live="polite">No reports selected yet. Add an import and choose a category.</div><button class="btn primary submit-reports" type="button" onclick="submitReportImports()">Submit</button>`;reportImports=[];nextImportId=1;addReportImport();const steps=document.querySelector('#import .steps');if(steps)steps.hidden=false;}
+function handleReportFile(e){const f=e.target.files&&e.target.files[0];if(f){document.getElementById('fileFeedback').textContent=`Selected: ${f.name} · ${(f.size/1024).toFixed(1)} KB. This prototype only records the selection; no server upload or government verification is performed.`;toast('File selected for demo review.');}}
+addReportImport();
+function csvEscape(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}
+function exportCSV(){let csv=[['Record','Source','Date','Status','Notes'],...records.map(r=>[r.name,r.source,r.date,r.status,r.detail])].map(row=>row.map(csvEscape).join(',')).join('\\r\\n');downloadBlob(csv,'pehchaan-ledger.csv','text/csv;charset=utf-8');toast('CSV exported.')}
+function downloadBlob(content,name,type){let blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+function downloadReport(){let c=counts(),lines=['PEHCHAAN — PERSONAL REVIEW EVIDENCE PACK','Generated: '+new Date().toLocaleString(),'','DEMO DISCLAIMER: fictional prototype data; not an official report or proof of fraud.','','SUMMARY',`Total records: ${records.length}`,`Recognized: ${c.known}`,`Not recognized: ${c.unfamiliar}`,'','RECORD LEDGER',...records.map(r=>`${r.date} | ${r.name} | ${r.source} | ${r.status} | ${r.detail}`)];downloadBlob(lines.join('\\n'),'pehchaan-evidence-report.txt','text/plain;charset=utf-8');toast('Evidence report downloaded.')}
+function renderReport(){let c=counts();document.getElementById('reportDate').textContent=new Date().toLocaleString();document.getElementById('reportSummary').innerHTML=`<div class="metrics" style="margin:0"><div class="metric"><small>Total records</small><strong>${records.length}</strong></div><div class="metric"><small>Recognized</small><strong class="good">${c.known}</strong></div><div class="metric"><small>Not recognized</small><strong class="warn">${c.unfamiliar}</strong></div><div class="metric"><small>Not recognized</small><strong class="bad">${c.review}</strong></div></div>`}
+function resetDemo(){if(confirm('Restore the original fictional demo records? Current browser-session changes will be lost.')){records=seed.map(x=>({...x}));nextId=13;renderRecords();renderAttention();renderReport();toast('Demo data restored.');}}
+function showGuidance(type){const data={
+credit:{title:'Credit record: review and dispute',steps:['Open your credit report from the official credit bureau website.','Check the lender name, account number, enquiry date and amount against your own records.','If the entry remains unfamiliar, contact the lender and submit a dispute through the bureau’s official process.','Keep the complaint/reference number and check the response.'],url:'https://www.rbi.org.in/',label:'RBI — official website',note:'Use the credit bureau named on your report for the actual dispute; RBI provides regulatory information.'},
+tax:{title:'Income Tax / AIS: review an entry',steps:['Sign in to the Income Tax Department e-filing portal and open AIS.','Compare the entry with Form 26AS, filed returns, bank statements and your own records.','Use the AIS feedback option or the relevant portal process if the information appears incorrect.','Save the acknowledgement and revisit the portal for updates.'],url:'https://www.incometax.gov.in/',label:'Income Tax Department e-Filing portal'},
+mobile:{title:'Unknown mobile connection: report it',steps:['Open Sanchar Saathi and choose the mobile connections service.','Review the connections shown against your details.','Select a connection you do not recognise and follow the portal’s reporting steps.','Save the request/acknowledgement number and check its status.'],url:'https://sancharsaathi.gov.in/',label:'Sanchar Saathi — official portal'},
+aadhaar:{title:'Aadhaar authentication: review history',steps:['Visit UIDAI’s official website and open Aadhaar services.','Use the authentication history service and review the dates and details available to you.','If an event remains unfamiliar, follow UIDAI’s published support and grievance process.','Never share an Aadhaar OTP or authentication credentials with another person.'],url:'https://uidai.gov.in/',label:'UIDAI — official website'},
+vehicle:{title:'Driving licence / vehicle record',steps:['Open the Ministry of Road Transport and Highways Parivahan portal.','Check the relevant driving licence or vehicle details using the portal’s supported service.','If details are incorrect or unfamiliar, contact the responsible RTO through official contact details.','Keep the application or grievance reference for follow-up.'],url:'https://parivahan.gov.in/',label:'Parivahan — official portal'},
+property:{title:'Property or land record',steps:['Identify the state and district authority responsible for the property record.','Open the relevant state government land-records or registration portal.','Compare the property identifier, owner details and dates with your documents.','For a discrepancy, contact the relevant land-records office or registration authority and retain the receipt/reference.'],url:'https://india.gov.in/',label:'National Portal of India — find the relevant state service'},
+voter:{title:'Voter or electoral record',steps:['Open the Election Commission of India voter services portal.','Search or review your electoral details using the portal’s supported service.','If an entry is unfamiliar or your details are wrong, follow the official correction/complaint process.','Save the acknowledgement number for follow-up.'],url:'https://voters.eci.gov.in/',label:'Voters’ Services Portal — ECI'},
+banking:{title:'Banking record: verify with the bank',steps:['Compare the entry with statements and communications obtained directly from your bank.','Contact the bank using the number or website printed on its official site or card.','If unresolved, use the bank’s formal complaint channel and keep the complaint number.','If the bank does not resolve an eligible complaint, review the RBI Complaint Management System process.'],url:'https://cms.rbi.org.in/',label:'RBI Complaint Management System'},
+business:{title:'Business / GST record',steps:['Open the official GST portal and use the relevant taxpayer/search service.','Compare the GSTIN, legal name and registration details with your records.','For a suspected misuse or incorrect registration, follow the GST portal’s official help or grievance route.','Keep screenshots or documents needed for the official complaint, avoiding unnecessary personal data.'],url:'https://www.gst.gov.in/',label:'GST — official portal'}
+};let d=data[type]||data.credit;lastGuidance=d.title+'\n'+d.steps.map((x,i)=>(i+1)+'. '+x).join('\n')+'\nOfficial link: '+d.url;document.getElementById('guidanceTitle').textContent=d.title;document.getElementById('guidanceBody').innerHTML=d.steps.map((x,i)=>`<p><b>${i+1}.</b> ${esc(x)}</p>`).join('')+`<p><b>Official government service:</b> <a href="${d.url}" target="_blank" rel="noopener noreferrer">${esc(d.label||'Open official portal')} ↗</a></p>`;}
+function copyGuidance(){if(!lastGuidance)lastGuidance='Before you act\\n1. Open the original official source.\\n2. Check dates, amounts and identifiers carefully.\\n3. Save only the evidence you need.\\n4. Contact the relevant institution through its verified website or helpline.\\n5. Record your reference number and follow-up date.';if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(lastGuidance).then(()=>toast('Checklist copied.')).catch(()=>alert(lastGuidance));else alert(lastGuidance)}
+renderRecords();renderAttention();renderReport();document.getElementById('reportDate').textContent=new Date().toLocaleString();
+</script>
+
+
+
+
+
+
+
+
+
+</body></html>
